@@ -29,6 +29,39 @@
             <form id="tag-form" action="/tagging" method="post">
 
                 <!-- ... your code here ... -->
+				
+				<fieldset>
+					<legend>Add new GeoTag</legend>
+				
+					<label for="latitude">Latitude:</label>
+
+					<input type="text" id="latitude" name="latitude" required
+				       minlength="2" maxlength="9" size="15" value="e.g. XX.xxxxxx" pattern="[1-9][1-9][\.][1-9]*">
+					   
+					<label for="longitude">Longitude:</label>
+
+					<input type="text" id="longitude" name="longitude" required
+				       minlength="1" maxlength="9" size="15" value="e.g. X.xxxxx" pattern="[1-9][\.][1-9]*">
+				
+					<label for="name">Name:</label>
+
+					<input type="text" id="name" name="name" required
+				       minlength="1" maxlength="10" size="15" value="e.g. HKa">
+					   
+					<label for="hashtag">Hashtag:</label>
+
+					<input type="text" id="hastag" name="hashtag" required
+				       minlength="2" maxlength="10" size="15" value="e.g. #University" pattern="[#][A-Za-z0-9]">
+					   
+					   
+					<button type="submit">Add new GeoTag</button>
+					
+						
+					   
+				</fieldset>
+				
+				
+				
 
             </form>
             <!-- ############### VS1Lab 1a Form 1 End -->
@@ -42,6 +75,29 @@
             <form class="discovery__search" id="discoveryFilterForm" action="/discovery" method="post">
 
                 <!-- ... your code here ... -->
+				
+				<fieldset>
+					<legend>Search</legend>
+					
+					<label for="searchterm">Search for:</label>
+
+					<input type="text" id="searchterm" name="searchterm" required
+				       minlength="2" maxlength="10" size="15" value="e.g. HKa" type="hidden">
+
+					<input type="hidden" id="latitudesearch" name="latitudesearch" value="49.01379">
+					   
+					<input type="hidden" id="longitudesearch" name="longitudesearch" value="8.404435">
+					   
+					<button class="send"
+					        type="button">
+					    Search
+					</button>
+					
+					
+				</fieldset>
+				
+				
+				<!--   type="hidden" -> versteckte Felder Daten etc... -->
 
             </form>
             <!-- ############### VS1Lab 1a Form 2 End -->
