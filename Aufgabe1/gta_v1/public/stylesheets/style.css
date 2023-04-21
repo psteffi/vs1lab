@@ -49,6 +49,12 @@ a {
 /* ... your code here ... */
 
 
+fieldset{
+  display: flex;
+  flex-direction: column;
+}
+
+
 /* Grid styles (no changes required) */
 
 .row {
@@ -111,15 +117,30 @@ a {
 
 /* ... your code here ... */
 
+header{
+  background-color: #cdcdcd;
+}
+
 
 /* ### TODO ### Styles for Main Component */
 
 /* ... your code here ... */
 
+main{
+  
+}
+
 
 /* ### TODO ### Styles for Tagging component */
 
 /* ... your code here ... */
+/*
+.main__tagging{
+  display: flex;
+  flex-direction: column;
+}
+*/
+
 
 
 /* ### TODO ### Styles for Discovery component */
@@ -131,6 +152,9 @@ a {
 
 /* ... your code here ... */
 
+footer{
+  background-color: #cdcdcd;
+}
 
 /* ### TODO ### Media Queries */
 
