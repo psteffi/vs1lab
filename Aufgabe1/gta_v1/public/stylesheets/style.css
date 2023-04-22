@@ -171,12 +171,6 @@ header{
 }
 
 ul li {
-  /* border: 1px solid black;
-  padding-right: 0px;
-  padding-left: 28px;
-  width: 250px;
-  border-radius: 5px; */
-
 
   border: solid #cdcdcd;
   width: 250px;
@@ -184,10 +178,6 @@ ul li {
   background-color: #e5e5e5;
   color: #00B7FF;
   list-style-type: none;
-
-  /* width: 250px;
-  border: solid #cdcdcd;
-  background-color: #e5e5e5; */
 }
 
 
