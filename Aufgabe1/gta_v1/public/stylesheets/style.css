@@ -195,10 +195,12 @@ footer{
 /* ... your code here ... */
 
 @media (max-width: 720px) {
-
-  .main {
+  
+  .row {
+    width: 100%;
     display: flex;
     flex-direction: column;
-    columns: 1;
+    justify-content: space-between;
+    flex: 1;
   }
 }

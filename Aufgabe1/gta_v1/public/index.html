@@ -14,7 +14,7 @@
 
 <body>
     <header class="header">
-        <img src="./images/location.png" class="header__image" alt="an image of a map and location">
+        <img src="./images/location.png" class="header__image col-1" alt="an image of a map and location">
         <h1 class="header__title">GeoTagApp</h1>
         <nav class="header__navigation">
             <a href="#">About</a> | <a href="#">Help</a> | <a href="/">Home</a>
@@ -35,13 +35,13 @@
 				
 					<label for="latitude">Latitude:</label>
 
-					<input type="text" id="latitude" name="latitude" required
-				       minlength="2" maxlength="9" size="15" placeholder="e.g. XX.xxxxxx" pattern="[1-9][1-9][\.][1-9]*">
+					<input type="text" id="latitude" name="latitude" readonly
+				       minlength="2" maxlength="9" size="15" value="e.g. XX.xxxxxx" pattern="[1-9][1-9][\.][1-9]*">
 					   
 					<label for="longitude">Longitude:</label>
 
-					<input type="text" id="longitude" name="longitude" required
-				       minlength="1" maxlength="9" size="15" placeholder="e.g. X.xxxxx" pattern="[1-9][\.][1-9]*">
+					<input type="text" id="longitude" name="longitude" readonly
+				       minlength="1" maxlength="9" size="15" value="e.g. X.xxxxx" pattern="[1-9][\.][1-9]*">
 				
 					<label for="name">Name:</label>
 
@@ -50,8 +50,8 @@
 					   
 					<label for="hashtag">Hashtag:</label>
 
-					<input type="text" id="hashtag" name="hashtag" required
-				       minlength="2" maxlength="10" size="15" placeholder="e.g. #University" pattern="[#][A-Za-z0-9]">
+					<input type="text" id="hashtag" name="hashtag"
+				       minlength="2" maxlength="10" size="15" placeholder="e.g. #University" pattern="[#][A-Za-z0-9] {1, 10}">
 					   
 					   
 					<button type="submit">Add new GeoTag</button>
@@ -102,17 +102,17 @@
             </form>
             <!-- ############### VS1Lab 1a Form 2 End -->
 
-            <div class="discovery__wrapper">
-                <div class="discovery__taglist">
+            <div class="discovery__wrapper row">
+                <div class="discovery__taglist col-4">
                     <ul class="discovery__results" id="discoveryResults">
                         <li>Castle (49.01379, 8.404435) #sight</li>
                         <li>IWI (49.01379, 8.390071) #edu</li>
                     </ul>
                 </div>
 
-                <div class="discovery__map">
+                <div class="discovery__map col-8">
                     <img src="./images/mapview.jpg" alt="a map with locations" id="mapView" />
-                    <span>Result map</span>
+                    <p>Result map</p>
                 </div>
             </div>
         </section>
