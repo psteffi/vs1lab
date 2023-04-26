@@ -48,6 +48,11 @@ a {
 
 /* ... your code here ... */
 
+fieldset {
+  display: flex;
+  flex-direction: column;
+}
+
 
 fieldset{
   display: flex;
@@ -126,8 +131,10 @@ header{
 
 /* ... your code here ... */
 
-main{
-  
+
+.main {
+  display: flex;
+  flex-direction: row;
 }
 
 
@@ -142,10 +149,50 @@ main{
 */
 
 
+.main__tagging.tagging {
+  display: flex;
+  flex-direction: column;
+
+}
+
+#latitude {
+  height: 40px;
+}
+
+#longitude {
+  height: 40px;
+}
+
+#name {
+  height: 40px;
+}
+
+#hashtag {
+  height: 40px;
+}
+
 
 /* ### TODO ### Styles for Discovery component */
 
 /* ... your code here ... */
+.main__discovery.discovery {
+  display: flex;
+  flex-direction: column;
+}
+
+#searchterm {
+  height: 40px;
+}
+
+ul li {
+
+  border: solid #cdcdcd;
+  width: 250px;
+  height: 40px;
+  background-color: #e5e5e5;
+  color: #00B7FF;
+  list-style-type: none;
+}
 
 
 /* ### TODO ### Styles for Footer Component */
@@ -159,3 +206,14 @@ footer{
 /* ### TODO ### Media Queries */
 
 /* ... your code here ... */
+
+@media (max-width: 720px) {
+  
+  .row {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+  }
+}
