@@ -194,7 +194,7 @@ footer{
 
 /* ... your code here ... */
 
-@media (max-width: 720px) {
+@media (max-width: 1000px) {
   
   .row {
     width: 100%;
