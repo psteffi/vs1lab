@@ -54,6 +54,12 @@ fieldset {
 }
 
 
+fieldset{
+  display: flex;
+  flex-direction: column;
+}
+
+
 /* Grid styles (no changes required) */
 
 .row {
@@ -125,6 +131,7 @@ header{
 
 /* ... your code here ... */
 
+
 .main {
   display: flex;
   flex-direction: row;
@@ -134,6 +141,13 @@ header{
 /* ### TODO ### Styles for Tagging component */
 
 /* ... your code here ... */
+/*
+.main__tagging{
+  display: flex;
+  flex-direction: column;
+}
+*/
+
 
 .main__tagging.tagging {
   display: flex;
@@ -188,7 +202,6 @@ ul li {
 footer{
   background-color: #cdcdcd;
 }
-
 
 /* ### TODO ### Media Queries */
 
