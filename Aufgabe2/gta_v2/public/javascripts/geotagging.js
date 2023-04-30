@@ -104,13 +104,9 @@ class MapManager {
  */
 // ... your code here ...
 
+/* document.updateLocation(){
 
-document.updateLocation(getMapUrl(),) {
-
-}
-
-
-
+} */
 
 // Wait for the page to fully load its DOM content, then call updateLocation
 document.addEventListener("DOMContentLoaded", () => {
