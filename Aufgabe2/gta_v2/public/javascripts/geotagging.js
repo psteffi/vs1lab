@@ -104,10 +104,9 @@ class MapManager {
  */
 // ... your code here ...
 
-
-document.updateLocation(getMapUrl(),) {
-
-}
+/* document.updateLocation(getMapUrl(),) {
+ * Nur vorbereitet, darf, kann, muss geändert werden.
+} */
 
 
 
