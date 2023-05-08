@@ -104,6 +104,22 @@ class MapManager {
  */
 // ... your code here ...
 
+function updateLocation(callback){
+    findLocation(callback);
+
+    latitude.value = position.coords.latitude.toFixed(5);
+    longitude.value = position.coords.latitude.toFixed(5);
+
+    // document.updateLocation(getMapUrl(), latitude){
+
+    // }
+    
+    // document.updateLocation(getMapUrl(), longitude) {
+
+    //     value = findLocation(setAttribute.longitude);
+    // }
+}
+
 /* document.updateLocation(getMapUrl(),) {
  * Nur vorbereitet, darf, kann, muss geändert werden.
 } */
