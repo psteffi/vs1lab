@@ -104,11 +104,23 @@ class MapManager {
  */
 // ... your code here ...
 
-function updateLocation(callback){
-    findLocation(callback);
+function updateLocation(){
+    
+    //Element im html Dokument suchen
+    const latitudeElement = document.getElementById('latitude')
 
-    latitude.value = position.coords.latitude.toFixed(5);
-    longitude.value = position.coords.latitude.toFixed(5);
+    findLocation( function callback(position) {
+        //code der aufgerufen wird nachdem die location api gelaufen ist
+
+        //aus dem position element den wert auslesen und anschliesend in das html element eintragen
+        latitudeElement.setAttribute('value',position.coords.latitude)
+
+
+
+
+
+    });
+
 
     // document.updateLocation(getMapUrl(), latitude){
 
@@ -129,5 +141,5 @@ function updateLocation(callback){
 
 // Wait for the page to fully load its DOM content, then call updateLocation
 document.addEventListener("DOMContentLoaded", () => {
-    alert("Please change the script 'geotagging.js'");
+    updateLocation()
 });
