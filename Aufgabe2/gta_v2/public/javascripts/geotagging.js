@@ -104,9 +104,18 @@ class MapManager {
  */
 // ... your code here ...
 
-/* document.updateLocation(){
+var mapM = new MapManager("BvSIZ5qQ0kchef3XsC2M3bhrzefd11vE");
 
-} */
+var testTags = [{latitude:49.014949, longitude:8.391252, name:"P"}, 
+                {latitude:49.014566, longitude:8.393976, name:"Mensa"}, 
+                {latitude:49.015020, longitude:8.388938, name:"LI"}];
+
+var mapurl = mapM.getMapUrl(49.015599, 8.390709, testTags, 16); // <-- fehlt noch!
+// var mapurl = ("https://media.diercke.net/omeda/800/100790_033_5.jpg"); // Hardcoded test: src setAttribute
+
+var mapView = document.querySelector("#mapView");
+mapView.setAttribute("src", mapurl);
+
 
 // Wait for the page to fully load its DOM content, then call updateLocation
 document.addEventListener("DOMContentLoaded", () => {
