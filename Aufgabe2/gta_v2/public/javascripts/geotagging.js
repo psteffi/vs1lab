@@ -113,44 +113,23 @@ function updateLocation(){
     const latitudesearchElement = document.getElementById('latitudesearch')
     const longitudesearchElement = document.getElementById('longitudesearch')
 
-
-    findLocation(function callback(position) {
+    LocationHelper.findLocation(function callback(position) {
         //code der aufgerufen wird nachdem die location api gelaufen ist
 
         //aus dem position element den wert auslesen und anschliesend in das html element eintragen
-        latitudeElement.setAttribute('value', position.coords.latitude)
-        longitudeElement.setAttribute('value', position.coords.longitude)
-        searchtermElemet.setAttribute('value', position.coords.searchterm)
-        latitudesearchElement.setAttribute('value', position.coords.latitudesearch)
-        longitudesearchElement.setAttribute('value', position.coords.longitudesearch)
-
-
-
-
+        latitudeElement.setAttribute('value', position.latitude)
+        longitudeElement.setAttribute('value', position.longitude)
+        latitudesearchElement.setAttribute('value', position.latitude)
+        longitudesearchElement.setAttribute('value', position.longitude)
 
     });
-
-
-    // document.updateLocation(getMapUrl(), latitude){
-
-    // }
-    
-    // document.updateLocation(getMapUrl(), longitude) {
-
-    //     value = findLocation(setAttribute.longitude);
-    // }
 }
 
 /* document.updateLocation(getMapUrl(),) {
  * Nur vorbereitet, darf, kann, muss geändert werden.
 } */
 
-
-
-
 // Wait for the page to fully load its DOM content, then call updateLocation
 document.addEventListener("DOMContentLoaded", () => {
-    //updateLocation()
-    document.updateLocation(getMapUrl(),) {
-    }
+    updateLocation() 
 });
