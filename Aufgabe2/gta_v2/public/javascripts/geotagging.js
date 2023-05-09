@@ -108,12 +108,21 @@ function updateLocation(){
     
     //Element im html Dokument suchen
     const latitudeElement = document.getElementById('latitude')
+    const longitudeElement = document.getElementById('longitude')
+    const searchtermElemet = document.getElementById('searchterm')
+    const latitudesearchElement = document.getElementById('latitudesearch')
+    const longitudesearchElement = document.getElementById('longitudesearch')
 
-    findLocation( function callback(position) {
+
+    findLocation(function callback(position) {
         //code der aufgerufen wird nachdem die location api gelaufen ist
 
         //aus dem position element den wert auslesen und anschliesend in das html element eintragen
-        latitudeElement.setAttribute('value',position.coords.latitude)
+        latitudeElement.setAttribute('value', position.coords.latitude)
+        longitudeElement.setAttribute('value', position.coords.longitude)
+        searchtermElemet.setAttribute('value', position.coords.searchterm)
+        latitudesearchElement.setAttribute('value', position.coords.latitudesearch)
+        longitudesearchElement.setAttribute('value', position.coords.longitudesearch)
 
 
 
@@ -141,5 +150,7 @@ function updateLocation(){
 
 // Wait for the page to fully load its DOM content, then call updateLocation
 document.addEventListener("DOMContentLoaded", () => {
-    updateLocation()
+    //updateLocation()
+    document.updateLocation(getMapUrl(),) {
+    }
 });
