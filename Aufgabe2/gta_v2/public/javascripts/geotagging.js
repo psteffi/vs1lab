@@ -114,7 +114,6 @@ function updateLocation(){
     //Element im html Dokument suchen
     const latitudeElement = document.getElementById('latitude');
     const longitudeElement = document.getElementById('longitude');
-    const searchtermElemet = document.getElementById('searchterm');
     const latitudesearchElement = document.getElementById('latitudesearch');
     const longitudesearchElement = document.getElementById('longitudesearch');
 
