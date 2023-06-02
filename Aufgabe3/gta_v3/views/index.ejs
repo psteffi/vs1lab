@@ -1,5 +1,11 @@
 <!-- TODO: HTML AUS AUFGABE2 HIERHER KOPIEREN UND DIE BEISPIEL-EINTRÄGE DER DISCOVERY-LISTE MIT DEN FOLGENDEN ZEILEN ERSETZEN -->
 
+
+<!-- Der Server kann das Array mit GeoTag Objekten als data-*-Attribut einem geeigneten Element beifügen.
+Erweitern sie dazu das EJS-Template derart, dass es dem img-Element der Karte ein data-tags-Attribut beifügt.
+In das Attribut schreiben sie das Array mit GeoTag Objekten als JSON-String.
+Für ein Array taglist erzeugt der Aufruf JSON.stringify(taglist) den JSON-String. -->
+
 <!DOCTYPE html>
 
 <!-- File origin: VS1LAB A1a -->
@@ -117,6 +123,7 @@
 
                 <div class="discovery__map col-8">
                     <img src="./images/mapview.jpg" alt="a map with locations" id="mapView" />
+                    <div id="taglist" data-tags='[]'></div>
                     <p>Result map</p>
                 </div>
             </div>
