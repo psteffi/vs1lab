@@ -1,5 +1,8 @@
 // File origin: VS1LAB A3
 
+const GeoTag = require("./geotag");
+const { tagList } = require("./geotag-examples");
+
 /**
  * This script is a template for exercise VS1lab/Aufgabe3
  * Complete all TODOs in the code documentation.
@@ -26,7 +29,32 @@
 class InMemoryGeoTagStore{
 
     // TODO: ... your code here ...
+    store = [tagList];          // const bringt hier einen Fehler
+
+    // Add
+    add() {
+        array.push(GeoTag)
+        console.log(store);
+    }
+
+    // Remove
+    remove() {
+        var index = store.find(name);
+        array.splice(index, 1);         // splice zum löschen eines Elementes ohne eine undefinierte Lücke zu hinterlassen.
+    }
+
+    // getNearby
+    getNearby() {
+        
+    }
+
+
+    // searchNearby
+    searchNearby() {
+
+    }
 
 }
 
 module.exports = InMemoryGeoTagStore
+// module.exports = GeoTagStore;
