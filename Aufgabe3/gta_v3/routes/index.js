@@ -62,7 +62,7 @@ router.get('/', (req, res) => {
 
 // TODO: ... your code here ...
 router.post('/tagging', (req, res) => {
-  res.render('index', { taglist: GeoTag})
+  res.render('index', { taglist: GeoTagStore})
 });
 
 /**
@@ -83,7 +83,7 @@ router.post('/tagging', (req, res) => {
 
 // TODO: ... your code here ...
 router.post('/discovery', (req, res) => {
-  res.render('index', { taglist: []})
+  res.render('index', { taglist: GeoTagStore})
 });
 
 

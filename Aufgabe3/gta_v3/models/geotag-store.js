@@ -32,25 +32,25 @@ class InMemoryGeoTagStore{
     store = [tagList];          // const bringt hier einen Fehler
 
     // Add
-    add() {
+    add(GeoTag) {
         array.push(GeoTag)
         console.log(store);
     }
 
     // Remove
-    remove() {
-        var index = store.find(name);
+    remove(GeoTag) {
+        var index = store.find(GeoTag);
         array.splice(index, 1);         // splice zum löschen eines Elementes ohne eine undefinierte Lücke zu hinterlassen.
     }
 
     // getNearby
-    getNearby() {
-        
+    getNearby(GeoTag) {
+        var location = GeoTag.latitude
     }
 
 
     // searchNearby
-    searchNearby() {
+    searchNearby(GeoTag) {
 
     }
 

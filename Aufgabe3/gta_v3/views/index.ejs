@@ -38,22 +38,22 @@
 					<label for="latitude">Latitude:</label>
 
 					<input type="text" id="latitude" name="latitude" readonly
-				       minlength="2" maxlength="9" size="15" value="e.g. XX.xxxxxx" pattern="[1-9][1-9][\.][1-9]*">
+				       minlength="2" maxlength="9" size="15" value="49.01379" pattern="[1-9][1-9][\.][1-9]*">
 					   
 					<label for="longitude">Longitude:</label>
 
 					<input type="text" id="longitude" name="longitude" readonly
-				       minlength="1" maxlength="9" size="15" value="e.g. X.xxxxx" pattern="[1-9][\.][1-9]*">
+				       minlength="1" maxlength="9" size="15" value="8.404435" pattern="[1-9][\.][1-9]*">
 				
 					<label for="name">Name:</label>
 
 					<input type="text" id="name" name="name" required
-				       minlength="1" maxlength="10" size="15" placeholder="e.g. HKA">
+				       minlength="1" maxlength="10" size="15" placeholder="IWI">
 					   
 					<label for="hashtag">Hashtag:</label>
 
 					<input type="text" id="hashtag" name="hashtag"
-				       minlength="2" maxlength="10" size="15" placeholder="e.g. #University" pattern="[#][A-Za-z0-9] {1, 10}">
+				       minlength="2" maxlength="10" size="15" placeholder="#University" pattern="[#][A-Za-z0-9] {1, 10}">
 					   
 					   
 					<button type="submit">Add new GeoTag</button>
@@ -86,9 +86,9 @@
 					<input type="text" id="searchterm" name="searchterm" required
 				       minlength="2" maxlength="10" size="15" placeholder="e.g. HKA" type="hidden">
 
-					<input type="hidden" id="latitudesearch" name="latitudesearch" value="49.01379">
+					<input type="hidden" id="latitudesearch" name="latitudesearch" value="<%-position.latitude%>"> <!-- value="49.01379"> -->
 					   
-					<input type="hidden" id="longitudesearch" name="longitudesearch" value="8.404435">
+					<input type="hidden" id="longitudesearch" name="longitudesearch" value="<%-position.longitude%>">
 					   
 					<button class="send"
 					        type="button">
