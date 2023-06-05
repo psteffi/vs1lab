@@ -37,21 +37,26 @@ function updateLocation(){
     )
     }
 
-    LocationHelper.findLocation(function callback(position) {
-        //code der aufgerufen wird nachdem die location api gelaufen ist
+    //Überprüfung, ob der Server eine vorhandenen Wert findet
+    if(checkPositionElements()){
+        //ansonsten Werte finden
+        LocationHelper.findLocation(function callback(position) {
+            //code der aufgerufen wird nachdem die location api gelaufen ist
+    
+            //aus dem position element den wert auslesen und anschliesend in das html element eintragen
+            latitudeElement.setAttribute('value', position.latitude);
+            longitudeElement.setAttribute('value', position.longitude);
+            latitudesearchElement.setAttribute('value', position.latitude);
+            longitudesearchElement.setAttribute('value', position.longitude);
+            var lat = position.latitude;
+            var long = position.longitude;
+            var mapurl = mapM.getMapUrl(lat, long, testTags, 16);
+            var mapView = document.querySelector("#mapView");
+            mapView.setAttribute("src", mapurl);
+    
+        });
 
-        //aus dem position element den wert auslesen und anschliesend in das html element eintragen
-        latitudeElement.setAttribute('value', position.latitude);
-        longitudeElement.setAttribute('value', position.longitude);
-        latitudesearchElement.setAttribute('value', position.latitude);
-        longitudesearchElement.setAttribute('value', position.longitude);
-        var lat = position.latitude;
-        var long = position.longitude;
-        var mapurl = mapM.getMapUrl(lat, long, testTags, 16);
-        var mapView = document.querySelector("#mapView");
-        mapView.setAttribute("src", mapurl);
-
-    });
+    }
 
 }
 
