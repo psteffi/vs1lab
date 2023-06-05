@@ -105,7 +105,7 @@ class MapManager {
 // ... your code here ...
 
 var mapM = new MapManager("BvSIZ5qQ0kchef3XsC2M3bhrzefd11vE");
-var taglist = `${latitude},${longitude}|marker-start`;
+var taglist = [];
 
 function updateLocation(){
     
@@ -138,4 +138,8 @@ function updateLocation(){
 // Wait for the page to fully load its DOM content, then call updateLocation
 document.addEventListener("DOMContentLoaded", () => {
     updateLocation();
+});
+
+document.addEventListener("submit", () => {
+    // taglist.push({`${latitude},${longitude}|marker-start`});
 });

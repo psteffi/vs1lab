@@ -123,7 +123,8 @@ Für ein Array taglist erzeugt der Aufruf JSON.stringify(taglist) den JSON-Strin
 
                 <div class="discovery__map col-8">
                     <img src="./images/mapview.jpg" alt="a map with locations" id="mapView"/>
-                    <li data-tags = "JSON.stringify(taglist)"></li>
+                    <!-- <li data-tags = "JSON.stringify(taglist)"></li> -->
+                    <div id="tags" data-tags="JSON.stringify(taglist)"></div>
                     <p>Result map</p>
                 </div>
             </div>
