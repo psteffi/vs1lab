@@ -26,18 +26,14 @@ function updateLocation(){
     const longitudesearchElement = document.getElementById('longitudesearch');
 
 
-    // Prüfen, ob longitude und latitude Werte bereits vorhanden sind
+    // Prüfen, ob longitude und latitude Werte bereits vorhanden sind und
     // Rückgabe eines boolean indicating status
     function checkPositionElements () {
     return (
-        latitudeElement.value === '' ||
+        latitudeElement.value === '' ||  // || logisches oder: wahr: wenn min. ein Operator true ist
         longitudeElement.value === '' ||
         latitudesearchElement.value === '' ||
-        longitudesearchElement.value === '' ||
-        isNaN(latitudeElement.value) ||
-        isNaN(longitudeElement.value) ||
-        isNaN(latitudesearchElement.value) ||
-        isNaN(longitudesearchElement.value)
+        longitudesearchElement.value === ''
     )
     }
 
