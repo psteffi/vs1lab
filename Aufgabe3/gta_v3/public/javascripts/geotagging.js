@@ -105,9 +105,7 @@ class MapManager {
 // ... your code here ...
 
 var mapM = new MapManager("BvSIZ5qQ0kchef3XsC2M3bhrzefd11vE");
-// var testTags = [{latitude:49.014949, longitude:8.391252, name:"P"}, 
-//                 {latitude:49.014566, longitude:8.393976, name:"Mensa"}, 
-//                 {latitude:49.015020, longitude:8.388938, name:"LI"}];
+var taglist = `${latitude},${longitude}|marker-start`;
 
 function updateLocation(){
     
