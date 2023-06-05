@@ -86,9 +86,9 @@
 					<input type="text" id="searchterm" name="searchterm" required
 				       minlength="2" maxlength="10" size="15" placeholder="e.g. HKA" type="hidden">
 
-					<input type="hidden" id="latitudesearch" name="latitudesearch" value="<%-position.latitude%>"> <!-- value="49.01379"> -->
+					<input type="hidden" id="latitudesearch" name="latitudesearch" value="<%= position.latitude %>"> <!-- value="49.01379"> -->
 					   
-					<input type="hidden" id="longitudesearch" name="longitudesearch" value="<%-position.longitude%>">
+					<input type="hidden" id="longitudesearch" name="longitudesearch" value="<%= position.longitude %>">
 					   
 					<button class="send"
 					        type="button">
