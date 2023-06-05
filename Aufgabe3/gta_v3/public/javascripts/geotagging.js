@@ -6,12 +6,16 @@ console.log("The geoTagging script is going to start...");
  */
 // ... your code here ...
 
-//Import von location-helper.js und map-manager.js notwendig!!!!
+//Import von location-helper.js und map-manager.js
+
+import * as locationHelper from './location-helper.js';
+import * as MapManager from './map-manager.js';
 
 var mapM = new MapManager("BvSIZ5qQ0kchef3XsC2M3bhrzefd11vE");
 var testTags = [{latitude:49.014949, longitude:8.391252, name:"P"}, 
                 {latitude:49.014566, longitude:8.393976, name:"Mensa"}, 
                 {latitude:49.015020, longitude:8.388938, name:"LI"}];
+
 
 function updateLocation(){
     
@@ -20,6 +24,22 @@ function updateLocation(){
     const longitudeElement = document.getElementById('longitude');
     const latitudesearchElement = document.getElementById('latitudesearch');
     const longitudesearchElement = document.getElementById('longitudesearch');
+
+
+    // Prüfen, ob longitude und latitude Werte bereits vorhanden sind
+    // Rückgabe eines boolean indicating status
+    function checkPositionElements () {
+    return (
+        latitudeElement.value === '' ||
+        longitudeElement.value === '' ||
+        latitudesearchElement.value === '' ||
+        longitudesearchElement.value === '' ||
+        isNaN(latitudeElement.value) ||
+        isNaN(longitudeElement.value) ||
+        isNaN(latitudesearchElement.value) ||
+        isNaN(longitudesearchElement.value)
+    )
+    }
 
     LocationHelper.findLocation(function callback(position) {
         //code der aufgerufen wird nachdem die location api gelaufen ist
@@ -38,7 +58,6 @@ function updateLocation(){
     });
 
 }
-
 
 // Wait for the page to fully load its DOM content, then call updateLocation
 document.addEventListener("DOMContentLoaded", () => {
