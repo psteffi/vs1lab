@@ -143,6 +143,6 @@ document.addEventListener("DOMContentLoaded", () => {
     updateLocation();
 });
 
-document.addEventListener("submit", () => {
-    // taglist.push({`${latitude},${longitude}|marker-start`});
-});
+// document.addEventListener("submit", () => {
+
+// });
