@@ -29,22 +29,22 @@ const { tagList } = require("./geotag-examples");
 class InMemorygeotagStore{
 
     // TODO: ... your code here ...
-    store = [];          // const bringt hier einen Fehler
+    #store = [];          // const bringt hier einen Fehler
 
     // Add
-    function add(geotag) {
-        array.push(geotag);
-        console.log(store);
+    add(geotag) {
+        this.#store.push(geotag)
+        console.log(store)
     }
 
     // Remove
-    function remove(name) {
-        var index = store.find(name);
-        array.splice(index, 1);         // splice zum löschen eines Elementes ohne eine undefinierte Lücke zu hinterlassen.
+    remove(name) {
+        var index = this.#store.find(name);
+        this.#store.splice(index, 1);         // splice zum löschen eines Elementes ohne eine undefinierte Lücke zu hinterlassen.
     }
 
     // getNearby
-    function getNearby(latitude, longitude, radius, store) {
+    getNearby(latitude, longitude, radius, store) {
         if (radius === undefined) {
             radius = 5
         }
@@ -79,7 +79,7 @@ class InMemorygeotagStore{
 
 
     // searchNearby
-    function searchNearby(name, localTags) {
+    searchNearby(name, localTags) {
         // Form validation
         if (localTags === undefined) {
             localTags = tagList
