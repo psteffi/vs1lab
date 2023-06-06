@@ -47,67 +47,33 @@ class InMemorygeotagStore{
 
     // Remove
     remove(name) {
-        var index = this.#store.find(name);
-        this.#store.splice(index, 1);         // splice zum löschen eines Elementes ohne eine undefinierte Lücke zu hinterlassen.
-        console.log(this.#store);
+        this.#store = this.#store.filter(geotag => geotag.name !== name);
     }
 
     // getNearby
-    getNearby(latitude, longitude, radius, store) {
-        console.log(this.#store);
+    getNearby(latitude, longitude, radius) {
+        return this.#store.filter(geotag => this.#haversine_distance(latitude, longitude, geotag.latitude, geotag.longitude) <= radius);
+    }
 
-        if (radius === undefined) {
-            radius = 5
-        }
-        const localTags = [];
-
-        store.forEach(function (geotag) {
-            var latDiff = geotag.latitude - lat;
-    
-            // check if Latitude is in range
-            if (-1 * radius <= latDiff && latDiff <= radius) {
-              var longDiff = geotag.longitude - long;
-    
-              /* longitude -179 and 180 are next to each other on the globe
-               * which means we need to account for overflows and under-flows
-               * when calculating relative distance */
-              if (longDiff > 180) {
-                longDiff -= 360
-              } else if (longDiff < -180) {
-                longDiff += 360
-              }
-    
-              // check if Longitude is in range
-              if (-1 * radius <= longDiff && longDiff <= radius) {
-                // all checks passed, object can be added to localTags
-                localTags.push(geotag)
-              }
-            }
-          })
-        
-        return localTags;
+    #haversine_distance(lat1, lon1, lat2, lon2) {
+        var earthRadius = 6378.137;
+        var dLat = lat2 * Math.PI / 180 - lat1 * Math.PI / 180;
+        var dLon = lon2 * Math.PI / 180 - lon1 * Math.PI / 180;
+        var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        var d = earthRadius * c;
+        return d * 1000;
     }
 
 
     // searchNearby
-    searchNearby(name, localTags) {
-        console.log(this.#store);
-
-        // Form validation
-        if (localTags === undefined) {
-            localTags = tagList
-        }
-
-        var searchExp = new RegExp(name, 'i')
-        var searchResult = []
-
-        // Iterate through each tag in list and return only tags that match the RegEx
-        searchResult = localTags.filter(function (geotag) {
-            return (searchExp.test(geotag.name) || searchExp.test(geotag.hashtag))
-        })
-
-        return searchResult
+    searchNearby(latitude, longitude, radius, searchTerm) {
+        return this.getNearby(latitude, longitude, radius).filter((geotag) =>
+            geotag.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            geotag.hashtag.toLowerCase().includes(searchTerm.toLowerCase())
+        );
     }
+
 }
 
 module.exports = InMemorygeotagStore
