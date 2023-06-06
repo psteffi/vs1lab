@@ -29,22 +29,33 @@ const { tagList } = require("./geotag-examples");
 class InMemorygeotagStore{
 
     // TODO: ... your code here ...
-    #store = [];          // const bringt hier einen Fehler
+    #store = [];
+
+
+    // Get all
+    getAll() {
+        console.log(this.#store);
+        return this.#store;
+    }
 
     // Add
     add(geotag) {
+        
         this.#store.push(geotag)
-        console.log(store)
+        console.log(this.#store)
     }
 
     // Remove
     remove(name) {
         var index = this.#store.find(name);
         this.#store.splice(index, 1);         // splice zum löschen eines Elementes ohne eine undefinierte Lücke zu hinterlassen.
+        console.log(this.#store);
     }
 
     // getNearby
     getNearby(latitude, longitude, radius, store) {
+        console.log(this.#store);
+
         if (radius === undefined) {
             radius = 5
         }
@@ -80,6 +91,8 @@ class InMemorygeotagStore{
 
     // searchNearby
     searchNearby(name, localTags) {
+        console.log(this.#store);
+
         // Form validation
         if (localTags === undefined) {
             localTags = tagList
