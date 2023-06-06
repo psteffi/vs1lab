@@ -21,7 +21,9 @@ function callback(position) {
 
 }
 
+
 function updateLocation(){
+
 
     console.log("Loading updateLocation()");
     var testTags = [{latitude:49.01027, longitude:8.42080, name:"Pub"}];
