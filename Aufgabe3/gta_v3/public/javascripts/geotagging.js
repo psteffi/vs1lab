@@ -105,7 +105,10 @@ class MapManager {
 // ... your code here ...
 
 var mapM = new MapManager("BvSIZ5qQ0kchef3XsC2M3bhrzefd11vE");
-var taglist = [];
+//json String
+var taglist_json = document.getElementById('tags');
+//Element Array
+var taglist = JSON.parse(taglist_json);
 
 function updateLocation(){
     
