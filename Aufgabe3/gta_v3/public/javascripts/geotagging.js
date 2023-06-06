@@ -1,63 +1,45 @@
+// File origin: VS1LAB A2
+
+/* eslint-disable no-unused-vars */
+
+
 console.log("The geoTagging script is going to start...");
-/**
- * TODO: 'updateLocation'
- * A function to retrieve the current location and update the page.
- * It is called once the page has been fully loaded.
- */
-// ... your code here ...
 
-//Import von location-helper.js und map-manager.js
+function callback(position) {
+    console.log("Loading callback(position)");
+    var testTags = [{latitude:49.01027, longitude:8.42080, name:"Pub"}];
+    var mapM = new MapManager("BvSIZ5qQ0kchef3XsC2M3bhrzefd11vE");
 
-import * as locationHelper from './location-helper.js';
-import * as MapManager from './map-manager.js';
+    document.getElementById('latitude').value = position.latitude;
+    document.getElementById('longitude').value = position.longitude;
+    document.getElementById('latitudesearch').value = position.latitude;
+    document.getElementById('longitudesearch').value = position.longitude;
 
-var mapM = new MapManager("BvSIZ5qQ0kchef3XsC2M3bhrzefd11vE");
-var testTags = [{latitude:49.014949, longitude:8.391252, name:"P"}, 
-                {latitude:49.014566, longitude:8.393976, name:"Mensa"}, 
-                {latitude:49.015020, longitude:8.388938, name:"LI"}];
+    var mapView = document.querySelector("#mapView");
+    var mapurl = mapM.getMapUrl(position.latitude, position.longitude, testTags, 16);
+    mapView.setAttribute("src", mapurl);
+
+}
 
 
 function updateLocation(){
-    
-    //Element im html Dokument suchen
-    const latitudeElement = document.getElementById('latitude');
-    const longitudeElement = document.getElementById('longitude');
-    const latitudesearchElement = document.getElementById('latitudesearch');
-    const longitudesearchElement = document.getElementById('longitudesearch');
 
 
-    // Prüfen, ob longitude und latitude Werte bereits vorhanden sind und
-    // Rückgabe eines boolean indicating status
-    function checkPositionElements () {
-    return (
-        latitudeElement.value === '' ||  // || logisches oder: wahr: wenn min. ein Operator true ist
-        longitudeElement.value === '' ||
-        latitudesearchElement.value === '' ||
-        longitudesearchElement.value === ''
-    )
+    console.log("Loading updateLocation()");
+    var testTags = [{latitude:49.01027, longitude:8.42080, name:"Pub"}];
+    var mapM = new MapManager("BvSIZ5qQ0kchef3XsC2M3bhrzefd11vE");
+
+    var lat = document.getElementById('latitude').value;
+    var long = document.getElementById('longitude').value;
+
+    if (lat === undefined || lat === "" || lat === "0") {
+        console.log("Locating Device")
+        LocationHelper.findLocation(callback);
     }
 
-    //Überprüfung, ob der Server eine vorhandenen Wert findet
-    if(checkPositionElements()){
-        //ansonsten Werte finden
-        LocationHelper.findLocation(function callback(position) {
-            //code der aufgerufen wird nachdem die location api gelaufen ist
-    
-            //aus dem position element den wert auslesen und anschliesend in das html element eintragen
-            latitudeElement.setAttribute('value', position.latitude);
-            longitudeElement.setAttribute('value', position.longitude);
-            latitudesearchElement.setAttribute('value', position.latitude);
-            longitudesearchElement.setAttribute('value', position.longitude);
-            var lat = position.latitude;
-            var long = position.longitude;
-            var mapurl = mapM.getMapUrl(lat, long, testTags, 16);
-            var mapView = document.querySelector("#mapView");
-            mapView.setAttribute("src", mapurl);
-    
-        });
-
-    }
-
+    var mapView = document.querySelector("#mapView");
+    var mapurl = mapM.getMapUrl(lat, long, testTags, 16);
+    mapView.setAttribute("src", mapurl);
 }
 
 // Wait for the page to fully load its DOM content, then call updateLocation
