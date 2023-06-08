@@ -37,14 +37,14 @@
 				
 					<label for="latitude">Latitude:</label>
 
-					<input type="text" id="latitude" name="latitude" readonly
-				       minlength="2" maxlength="9" size="15" placeholder="49.01379" 
+					<input type="text" id="latitude" name="latitude"
+				       minlength="2" maxlength="9" size="15" value="49.01379" readonly
                        value="<%= locals.latitude ?? "" %>" pattern="[1-9][1-9][\.][1-9]*" required /> 
 					   
 					<label for="longitude">Longitude:</label>
 
-					<input type="text" id="longitude" name="longitude" readonly
-				       minlength="1" maxlength="9" size="15" placeholder="8.40444" 
+					<input type="text" id="longitude" name="longitude"
+				       minlength="1" maxlength="9" size="15" value="8.40444" readonly
                        value="<%= locals.longitude ?? "" %>" pattern="[1-9][\.][1-9]*" required /> 
 				
 					<label for="name">Name:</label>
@@ -55,7 +55,7 @@
 					<label for="hashtag">Hashtag:</label>
 
 					<input type="text" id="hashtag" name="hashtag"
-				       minlength="2" maxlength="10" size="15" placeholder="#University" pattern="[#][A-Za-z0-9] {1, 10}">
+				       minlength="2" maxlength="10" size="15" placeholder="#University" pattern="[#][A-Za-z0-9] {1, 11}">
 					   
 					   
 					<button type="submit">Add new GeoTag</button>
@@ -119,6 +119,7 @@
 
                 <div class="discovery__map col-8">
                     <img src="./images/mapview.jpg" alt="a map with locations" id="mapView" />
+                    <div id="tags" data-tags="JSON.stringify(taglist)"></div>
                     <p>Result map</p>
                 </div>
             </div>

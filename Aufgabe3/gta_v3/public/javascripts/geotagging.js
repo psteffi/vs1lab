@@ -7,8 +7,9 @@ console.log("The geoTagging script is going to start...");
 
 function callback(position) {
     console.log("Loading callback(position)");
-    var testTags = [{latitude:49.01027, longitude:8.42080, name:"Pub"}];
+    // var testTags = [{latitude:49.01027, longitude:8.42080, name:"Pub"}];
     var mapM = new MapManager("BvSIZ5qQ0kchef3XsC2M3bhrzefd11vE");
+
 
     document.getElementById('latitude').value = position.latitude;
     document.getElementById('longitude').value = position.longitude;
@@ -16,7 +17,7 @@ function callback(position) {
     document.getElementById('longitudesearch').value = position.longitude;
 
     var mapView = document.querySelector("#mapView");
-    var mapurl = mapM.getMapUrl(position.latitude, position.longitude, testTags, 16);
+    var mapurl = mapM.getMapUrl(position.latitude, position.longitude, taglist, 16);
     mapView.setAttribute("src", mapurl);
 
 }
@@ -26,8 +27,12 @@ function updateLocation(){
 
 
     console.log("Loading updateLocation()");
-    var testTags = [{latitude:49.01027, longitude:8.42080, name:"Pub"}];
+    // var testTags = [{latitude:49.01027, longitude:8.42080, name:"Pub"}];
     var mapM = new MapManager("BvSIZ5qQ0kchef3XsC2M3bhrzefd11vE");
+    var taglist_json = document.getElementById('tags');
+    var taglist = JSON.parse(taglist_json);
+    let taglist = `${latitude},${longitude}|marker-start`;
+    taglist += tags.reduce((acc, tag) => `${acc}||${tag.latitude},${tag.longitude}|flag-${tag.name}`, "");
 
     var lat = document.getElementById('latitude').value;
     var long = document.getElementById('longitude').value;
@@ -38,7 +43,7 @@ function updateLocation(){
     }
 
     var mapView = document.querySelector("#mapView");
-    var mapurl = mapM.getMapUrl(lat, long, testTags, 16);
+    var mapurl = mapM.getMapUrl(lat, long, taglist, 16);
     mapView.setAttribute("src", mapurl);
 }
 
