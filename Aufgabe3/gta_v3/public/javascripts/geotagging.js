@@ -5,12 +5,15 @@
 
 console.log("The geoTagging script is going to start...");
 
-var taglist = [];
-const imageElement = document.getElementById('mapView');
-const taglist_json = imageElement.getAttribute('data-tags');
-taglist = JSON.parse(taglist_json);
 var mapM = new MapManager("BvSIZ5qQ0kchef3XsC2M3bhrzefd11vE");
 
+
+function parseTags() {
+    var taglist = [];
+    const imageElement = document.getElementById('mapView');
+    const taglist_json = imageElement.getAttribute('data-tags');
+    return JSON.parse(taglist_json);
+}
 
 function callback(position) {
     console.log("Loading callback(position)");
@@ -23,8 +26,9 @@ function callback(position) {
     document.getElementById('latitudesearch').value = position.latitude;
     document.getElementById('longitudesearch').value = position.longitude;
 
-    var mapView = document.querySelector("#mapView");
-    var mapurl = mapM.getMapUrl(position.latitude, position.longitude, taglist, 16);
+    const taglist = parseTags();
+    const mapView = document.getElementById('mapView');
+    const mapurl = mapM.getMapUrl(position.latitude, position.longitude, taglist, 16);
     mapView.setAttribute("src", mapurl);
 
 }
@@ -46,21 +50,15 @@ function updateLocation(){
         LocationHelper.findLocation(callback);
     }
 
-    var mapView = document.querySelector("#mapView");
-    var mapurl = mapM.getMapUrl(lat, long, taglist, 16);
+    const taglist = parseTags();
+    const mapView = document.getElementById('mapView');
+    const mapurl = mapM.getMapUrl(lat, long, taglist, 16);
     mapView.setAttribute("src", mapurl);
 }
 
-
-function search() {
-    var searchterm = document.getElementById("searchterm");
-    for (var i = 0; i < taglist.length; i++) {
-        if (taglist[i].getAttribute("name") == searchterm) {
-            var mapurl = mapM.getMapUrl(taglist[i].getAttribute("latitude"), taglist[i].getAttribute("longitude"), searchterm, 16);
-            mapview.setAttribute("src", mapurl);
-        }
-    }
-}
+    // function search() {
+    //     const searchButton = document.getElementById('submitGeoTag');
+    // }
 
 // Wait for the page to fully load its DOM content, then call updateLocation
 document.addEventListener("DOMContentLoaded", () => {
