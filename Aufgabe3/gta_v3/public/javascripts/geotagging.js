@@ -6,8 +6,9 @@
 console.log("The geoTagging script is going to start...");
 
 var taglist = [];
-var taglist_json = JSON.stringify(document.getElementsByName('data-tags'));
-taglist.push(JSON.parse(taglist_json));
+const imageElement = document.getElementById('mapView');
+const taglist_json = imageElement.getAttribute('data-tags');
+taglist = JSON.parse(taglist_json);
 var mapM = new MapManager("BvSIZ5qQ0kchef3XsC2M3bhrzefd11vE");
 
 
