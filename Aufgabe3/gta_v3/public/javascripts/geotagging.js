@@ -6,6 +6,7 @@
 console.log("The geoTagging script is going to start...");
 
 var mapM = new MapManager("BvSIZ5qQ0kchef3XsC2M3bhrzefd11vE");
+const searchButton = document.getElementById('submitGeoTag');
 
 
 function parseTags() {
@@ -57,10 +58,25 @@ function updateLocation(){
 }
 
     // function search() {
-    //     const searchButton = document.getElementById('submitGeoTag');
+    //     // const searchTerm = document.getElementById('discoveryFilterForm').value;
+    //     // const lat = searchTerm.getAttribute('latitudesearch').value;
+    //     // const long = searchTerm.getAttribute('longitudesearch').value;
+    //     //durch taglist iterieren und searchTerm suchen?
+    //     // const searchTerm = document.getElementById('searchterm');
+    //     // const taglist = parseTags();
+    //     // for (var i = 0; i < taglist.length; i++) {
+    //     //     if (taglist[i].getAttribute() == )
+    //     // }
+    //     const mapView = document.getElementById('mapView');
+    //     const mapurl = mapM.getMapUrl(lat, long, taglist, 16);
+    //     mapView.setAttribute("src", mapurl);
     // }
 
 // Wait for the page to fully load its DOM content, then call updateLocation
 document.addEventListener("DOMContentLoaded", () => {
     updateLocation();
 });
+
+// searchButton.addEventListener("click", () => {
+//     search();
+// });
