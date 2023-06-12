@@ -95,22 +95,22 @@ router.post('/tagging', (req, res) => {
 
 // TODO: ... your code here ...
 router.post('/discovery', (req, res) => {
-  const searchRadius = 2000;
-  const latitude = parseFloat(req.body.latitude);
-  const longitude = parseFloat(req.body.longitude);
+  const searchRadius = 1;
+  const latitude = parseFloat(req.body.latitudesearch);
+  const longitude = parseFloat(req.body.longitudesearch);
   let taglist = [];
  
-  if (req.body.query) {
-    taglist = database.searchNearby(latitude, longitude, searchRadius, req.body.query);
+  if (req.body.searchterm) {
+    taglist = database.searchNearby(latitude, longitude, searchRadius, req.body.searchterm);
   } else {
     taglist = database.getNearby(latitude, longitude, searchRadius);
   }
 
   res.render('index', {
     taglist: taglist, 
-    query: req.body.query,
-    latitude: req.body.latitude,
-    longitude: req.body.longitude
+    query: req.body.searchterm,
+    latitude: latitude,
+    longitude: longitude
   });
 })
 

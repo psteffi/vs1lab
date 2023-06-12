@@ -52,7 +52,13 @@ class InMemorygeotagStore{
 
     // getNearby
     getNearby(latitude, longitude, radius) {
-        return this.#store.filter(geotag => this.#haversine_distance(latitude, longitude, geotag.latitude, geotag.longitude) <= radius);
+        return this.#store.filter(geotag => this.#distancepythgoras(latitude, longitude, geotag.latitude, geotag.longitude) <= radius);
+    }
+
+    #distancepythgoras(lat1, lon1, lat2, lon2) {
+        var a = Math.pow(lat1 - lat2, 2);
+        var b = Math.pow(lon1 - lon2, 2);
+        return Math.sqrt(a+b);
     }
 
     #haversine_distance(lat1, lon1, lat2, lon2) {
@@ -68,6 +74,7 @@ class InMemorygeotagStore{
 
     // searchNearby
     searchNearby(latitude, longitude, radius, searchTerm) {
+        console.log(this.getNearby(latitude, longitude, radius));
         return this.getNearby(latitude, longitude, radius).filter((geotag) =>
             geotag.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
             geotag.hashtag.toLowerCase().includes(searchTerm.toLowerCase())
