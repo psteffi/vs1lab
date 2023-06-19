@@ -25,7 +25,13 @@ const GeoTag = require('../models/geotag');
  * It provides an in-memory store for geotag objects.
  */
 // eslint-disable-next-line no-unused-vars
+
 const GeoTagStore = require('../models/geotag-store');
+let database = new GeoTagStore();
+const exampleData = require('../models/geotag-examples');
+exampleData.tagList.forEach(geotag => {
+  database.add(new GeoTag(geotag[1], geotag[2], geotag[0], geotag[3]))
+});
 
 // App routes (A3)
 
@@ -39,8 +45,39 @@ const GeoTagStore = require('../models/geotag-store');
  */
 
 router.get('/', (req, res) => {
-  res.render('index', { taglist: [] })
+  res.render('index', { taglist: database.getAll() })
 });
+
+router.post('/tagging', (req, res) => {
+  database.add(new GeoTag(req.body.latitude, req.body.longitude, req.body.name, req.body.hashtag));
+  res.render('index', {
+    taglist: database.getAll(), 
+    query: req.body.query,
+    latitude: req.body.latitude,
+    longitude: req.body.longitude
+  });
+});
+
+
+router.post('/discovery', (req, res) => {
+  const searchRadius = 1;
+  const latitude = parseFloat(req.body.latitudesearch);
+  const longitude = parseFloat(req.body.longitudesearch);
+  let taglist = [];
+ 
+  if (req.body.searchterm) {
+    taglist = database.searchNearby(latitude, longitude, searchRadius, req.body.searchterm);
+  } else {
+    taglist = database.getNearby(latitude, longitude, searchRadius);
+  }
+
+  res.render('index', {
+    taglist: taglist, 
+    query: req.body.searchterm,
+    latitude: latitude,
+    longitude: longitude
+  });
+})
 
 // API routes (A4)
 
