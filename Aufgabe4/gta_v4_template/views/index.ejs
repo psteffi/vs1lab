@@ -115,7 +115,18 @@
                             <li><%= gtag.name %> ( <%= gtag.latitude %>,<%= gtag.longitude %>) <%= gtag.hashtag %> </li>
                         <% }); %>
                     </ul>
+                    <div class="pagination_selection">
+                        <a href="#"><< Previous</a>
+                        <a href="#">1</a>
+                        <a href="#">2</a>
+                        <a href="#">3</a>
+                        <a href="#">4</a>
+                        <a href="#">5</a>
+                        <a href="#">Next >></a>
+                    </div>
                 </div>
+            
+            
 
                 <div class="discovery__map col-8">
                     <img src="./images/mapview.jpg" alt="a map with locations" id="mapView" data-tags="<%= JSON.stringify(taglist) %>"/>
