@@ -8,7 +8,6 @@ console.log("The geoTagging script is going to start...");
 var mapM = new MapManager("BvSIZ5qQ0kchef3XsC2M3bhrzefd11vE");
 const searchButton = document.getElementById('submitGeoTag');
 
-
 function parseTags() {
     var taglist = [];
     const imageElement = document.getElementById('mapView');
@@ -52,6 +51,40 @@ function updateLocation(){
     const mapurl = mapM.getMapUrl(lat, long, taglist, 16);
     mapView.setAttribute("src", mapurl);
 }
+
+
+// ### TODO ### Pagination
+
+
+// const numbers = document.querySelectorAll(".links");
+
+// //Setting in initial step
+// let currentStep = 0;
+
+// //Function to update
+
+// const listArray = []
+// for (let i = 0; i < 40; i++) {
+//     listArray.push(`<li class="list-group-item">${i}</li>`)
+// }
+
+// const numberOfItems = listArray.length
+// const numberPerPage = 5
+// const currentPage = 1
+// const numberOfPages = Math.ceil(numberOfItems/numberPerPage)
+
+// const trimStart = (currPage - 1) * numberPerPage
+// const trimEnd = trimStart + numberPerPage
+
+// // //if currentPage =1
+// // const trimStart = (1 - 1) * 5 = 0
+// // const trimEnd = 0 + 5 = 5
+
+// // //if currentPage = 2
+
+// function buildPage(currPage) {
+//     const trimStart = ()
+// }
 
 
 // Wait for the page to fully load its DOM content, then call updateLocation
