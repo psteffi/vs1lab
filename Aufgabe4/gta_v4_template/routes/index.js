@@ -167,7 +167,7 @@ router.get('/api/geotags', (req, res) => {
 router.get('/api/geotags/:id', (req, res) => {
   const id = req.params.id;
 //--- finde den GeoTag mit dieser id und übergebe sie an geotag ---//
-  let geotag = this.#store.find(geotag => geotag.id == id);
+  //let geotag = this.#store.find(geotag => geotag.id == id);
 
   res.render('index', {
     geotag : JSON.parse(geotag)
@@ -199,19 +199,14 @@ router.put('/api/geotags/:id', (req, res) =>  {
   const hashtag = req.body.hashtag;
 
 //--- finde den GeoTag mit angegebener ID und ersetze seine Attribute ---//
-  let geotag = this.#store.find(geotag => geotag.id == id);
-  //das//
-  geotag = new GeoTag(latitude, longitude, name, hashtag);
-  //oder das?//
-  geotag.latitude = latitude;
-  geotag.longitude = longitude;
-  geotag.name = name;
-  geotag.hashtag - hashtag;
-  //braucht man das?//
-  this.#store.push(geotag);
+ // let geotag = this.#store.find(geotag => geotag.id == id);
+  // geotag = new GeoTag(latitude, longitude, name, hashtag);
+  //geotag mit id löschen und neuen erstellen mit dieser id
+
+
 
   res.render('index', {
-    geotag : JSON.parse(geotag),
+    geotag : JSON.parse(geotag)
   });
 })
 
@@ -230,10 +225,10 @@ router.put('/api/geotags/:id', (req, res) =>  {
 // TODO: ... your code here ...
 
 
-router.delete('/api/geotags.:id', (req, res) => {
+router.delete('/api/geotags/:id', (req, res) => {
   const id = req.params.id;
 //--- finde den GeoTag anhand seiner ID ---//
-  let geotag = this.#store.find(geotag => geotag.id == id);
+ // let geotag = this.#store.find(geotag => geotag.id == id);
 //--- lösche den GeoTag anhand seines Namens ---//
   database.remove(geotag.name);
 
