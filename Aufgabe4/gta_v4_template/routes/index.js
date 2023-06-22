@@ -99,21 +99,26 @@ router.post('/discovery', (req, res) => {
 router.get('/api/geotags', (req, res) => {
 
   let taglist = [];
-  const latitude = parseFloat(req.body.latitudesearch);
-  const longitude = parseFloat(req.body.longitudesearch);
+  const latitude = parseFloat(req.body.latitude);
+  const longitude = parseFloat(req.body.longitude);
   const searchterm = req.body.searchterm;
 
-
-  if (searchterm) {
-    taglist = JSON.parse(database.searchNearby(latitude, longitude, 1, searchterm));
-  }
+//--- sind latitude und longitude gegen, wird auf searchterm geprüft ---//
   if (latitude && longitude) {
-    taglist = JSON.parse(database.getNearby(latitude, longitude, 1, searchterm));
+//--- ist searchterm: es wird auch nach searchterm gefiltert ---//
+    if (searchterm) {
+      taglist = database.searchNearby(latitude, longitude, 1, searchterm);
+//--- ist searchterm nicht gegeben, werden Tags nach aktuellem Radius gesucht ---//
+    } else {
+      taglist = database.getNearby(latitude, longitude, 1);
+    }
+//ansonsten sollen alle angezeigt werden ---//
+  } else { 
+    taglist = database.getAll();
   }
 
   res.render('index', {
     taglist : JSON.parse(taglist),
-    query : req.body
   });
 })
 
@@ -132,18 +137,17 @@ router.get('/api/geotags', (req, res) => {
 
   router.post('/api/geotags', (req, res) => {
 
-    let taglist = [];
     const latitude = parseFloat(req.body.latitudesearch);
     const longitude = parseFloat(req.body.longitudesearch);
-    const searchterm = req.body.searchterm;
-    const url = JSON.parse(mapM.getMapUrl(latitude, longitude, taglist, 1));
+    const name = req.body.name;
+    const hashtag = req.body.hashtag;
 
-    res.render('index', {
-      taglist : JSON.parse(taglist),
-      query : req.query,
-      URL : url
-      //newResource : JSON.parse(newResource)
-    });
+//--- neuer Tag mit entsprechender id ---//
+    let id = database.add(new GeoTag(latitude, longitude, name, hashtag));
+//--- URL des neuen Tags soll im Location HTTP-Header mit AJAX zurückgesandt werden ---//
+    res.set('Location', `/api/geotags/${id}`);    
+//--- HTTP Response Code ist 201 (created) ---//
+    res.sendStatus(201);
   })
 
 
