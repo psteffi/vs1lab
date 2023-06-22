@@ -166,10 +166,11 @@ router.get('/api/geotags', (req, res) => {
 
 router.get('/api/geotags/:id', (req, res) => {
   const id = req.params.id;
-  
+//--- finde den GeoTag mit dieser id und übergebe sie an geotag ---//
+  let geotag = this.#store.find(geotag => geotag.id == id);
 
   res.render('index', {
-    id: req.params.id
+    geotag : JSON.parse(geotag)
   });
 })
 
@@ -191,10 +192,26 @@ router.get('/api/geotags/:id', (req, res) => {
 
 router.put('/api/geotags/:id', (req, res) =>  {
   //const tag = Objekt.id
+  const id = req.params.id;
+  const latitude = parseFloat(req.body.latitudesearch);
+  const longitude = parseFloat(req.body.longitudesearch);
+  const name = req.body.name;
+  const hashtag = req.body.hashtag;
+
+//--- finde den GeoTag mit angegebener ID und ersetze seine Attribute ---//
+  let geotag = this.#store.find(geotag => geotag.id == id);
+  //das//
+  geotag = new GeoTag(latitude, longitude, name, hashtag);
+  //oder das?//
+  geotag.latitude = latitude;
+  geotag.longitude = longitude;
+  geotag.name = name;
+  geotag.hashtag - hashtag;
+  //braucht man das?//
+  this.#store.push(geotag);
 
   res.render('index', {
-    resource : JSON.parse(resource),
-    id : req.params.id
+    geotag : JSON.parse(geotag),
   });
 })
 
@@ -211,5 +228,18 @@ router.put('/api/geotags/:id', (req, res) =>  {
  */
 
 // TODO: ... your code here ...
+
+
+router.delete('/api/geotags.:id', (req, res) => {
+  const id = req.params.id;
+//--- finde den GeoTag anhand seiner ID ---//
+  let geotag = this.#store.find(geotag => geotag.id == id);
+//--- lösche den GeoTag anhand seines Namens ---//
+  database.remove(geotag.name);
+
+  res.render('index', {
+    geotag : JSON.parse(geotag)
+  });
+})
 
 module.exports = router;
