@@ -96,6 +96,27 @@ router.post('/discovery', (req, res) => {
 // TODO: ... your code here ...
 
 
+router.get('/api/geotags', (req, res) => {
+
+  let taglist = [];
+  const latitude = parseFloat(req.body.latitudesearch);
+  const longitude = parseFloat(req.body.longitudesearch);
+  const searchterm = req.body.searchterm;
+
+
+  if (searchterm) {
+    taglist = JSON.parse(database.searchNearby(latitude, longitude, 1, searchterm));
+  }
+  if (latitude && longitude) {
+    taglist = JSON.parse(database.getNearby(latitude, longitude, 1, searchterm));
+  }
+
+  res.render('index', {
+    taglist : JSON.parse(taglist),
+    query : req.body
+  });
+})
+
 /**
  * Route '/api/geotags' for HTTP 'POST' requests.
  * (http://expressjs.com/de/4x/api.html#app.post.method)
@@ -108,6 +129,22 @@ router.post('/discovery', (req, res) => {
  */
 
 // TODO: ... your code here ...
+
+  router.post('/api/geotags', (req, res) => {
+
+    let taglist = [];
+    const latitude = parseFloat(req.body.latitudesearch);
+    const longitude = parseFloat(req.body.longitudesearch);
+    const searchterm = req.body.searchterm;
+    const url = JSON.parse(mapM.getMapUrl(latitude, longitude, taglist, 1));
+
+    res.render('index', {
+      taglist : JSON.parse(taglist),
+      query : req.query,
+      URL : url
+      //newResource : JSON.parse(newResource)
+    });
+  })
 
 
 /**
@@ -122,6 +159,15 @@ router.post('/discovery', (req, res) => {
 
 // TODO: ... your code here ...
 
+
+router.get('/api/geotags/:id', (req, res) => {
+  const id = req.params.id;
+  
+
+  res.render('index', {
+    id: req.params.id
+  });
+})
 
 /**
  * Route '/api/geotags/:id' for HTTP 'PUT' requests.
@@ -138,6 +184,15 @@ router.post('/discovery', (req, res) => {
  */
 
 // TODO: ... your code here ...
+
+router.put('/api/geotags/:id', (req, res) =>  {
+  //const tag = Objekt.id
+
+  res.render('index', {
+    resource : JSON.parse(resource),
+    id : req.params.id
+  });
+})
 
 
 /**

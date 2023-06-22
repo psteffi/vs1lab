@@ -52,23 +52,13 @@ class InMemorygeotagStore{
 
     // getNearby
     getNearby(latitude, longitude, radius) {
-        return this.#store.filter(geotag => this.#distancepythgoras(latitude, longitude, geotag.latitude, geotag.longitude) <= radius);
+        return this.#store.filter(geotag => this.#distancepythagoras(latitude, longitude, geotag.latitude, geotag.longitude) <= radius);
     }
 
-    #distancepythgoras(lat1, lon1, lat2, lon2) {
+    #distancepythagoras(lat1, lon1, lat2, lon2) {
         var a = Math.pow(lat1 - lat2, 2);
         var b = Math.pow(lon1 - lon2, 2);
         return Math.sqrt(a+b);
-    }
-
-    #haversine_distance(lat1, lon1, lat2, lon2) {
-        var earthRadius = 6378.137;
-        var dLat = lat2 * Math.PI / 180 - lat1 * Math.PI / 180;
-        var dLon = lon2 * Math.PI / 180 - lon1 * Math.PI / 180;
-        var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
-        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        var d = earthRadius * c;
-        return d * 1000;
     }
 
 
