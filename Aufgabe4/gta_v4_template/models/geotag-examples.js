@@ -28,7 +28,6 @@ class GeoTagExamples {
             ['Building A', 49.015738, 8.391619, '#campus'],
             ['Building B', 49.016843, 8.391372, '#campus'],
             ['Building K', 49.013190, 8.392090, '#campus'],
-            ['HS Mannheim', 49.47011, 8.48246, '#campus']
         ];
     }
 }
