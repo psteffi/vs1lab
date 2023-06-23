@@ -26,7 +26,7 @@ Content-Type: application/json
 
 {
 //--- Koordinaten IWI ---//
-   // "latitude" : 49.01379,
+  //  "latitude" : 49.01379,
    // "longitude" : 8.390071
 //--- Koordinaten HS Mannheim ---//
    "latitude" : 49.47009,
