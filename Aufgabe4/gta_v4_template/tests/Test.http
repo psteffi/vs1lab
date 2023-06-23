@@ -7,24 +7,31 @@
 GET {{host}}
 
 
-### GET with only searchterm present
+### GET with latitude, longitude, searchterm present (Koordinaten IWI) //working
 
 GET {{host}}{{api}}
-Content-Type: application/application/json
+Content-Type: application/json
 
 {
-    "searchterm" : "Building"
+    "latitude" : 49.01379,
+    "longitude" : 8.390071,
+    "searchterm" : "#campus"
 }
 
 
-### GET with latitude, longitude only present
+### GET with latitude, longitude only present (Koordinaten IWI)
 
 GET {{host}}{{api}}
+Content-Type: application/json
 
-
-### GET with latitude, longitude, searchterm present
-
-GET {{host}}{{api}}
+{
+//--- Koordinaten IWI ---//
+   // "latitude" : 49.01379,
+   // "longitude" : 8.390071
+//--- Koordinaten HS Mannheim ---//
+   "latitude" : 49.47009,
+   "longitude" : 8.48240
+}
 
 
 ### POST new GeoTag (nach jedem Post sollte sich die ID um 1 erhöhen) //working
