@@ -55,39 +55,90 @@ function updateLocation(){
 
 // ### TODO ### Pagination
 
+    //Setting in initial step
+function pagination() {
 
-// const numbers = document.querySelectorAll(".links");
+    const numberOfItems = taglist.length
+    const numberPerPage = 5
+    const currentPage = 1
+    const numberOfPages = Math.ceil(numberOfItems/numberPerPage) //Division mit aufrunden
 
-// //Setting in initial step
-// let currentStep = 0;
+    function accomodatePage(clickedPage) {
+        if (clickedPage <= 1) { return clickedPage + 1}
+        if (clickedPage >= numberOfPages) { return clickedPage -1}
+        return clickedPage
+    }
+    
 
-// //Function to update
+    function buildPagination(clickedPage) {
+        $('.pagiation_selector').empty()
+        const currPageNum = accomodatePage(clickedPage)
+        //ausgeklammert, da meiner Meinung nach nicht benötigt
+        // if (numberOfPages >= 3) {
+        //     for (let i=-1; i<2; i++) {
+        //         $('.pagination_selector').append(`<button class="btn btn-primary" value="${currPageNum+i}">${currPageNum+i}</button>`)
+        //     }
+        // } else {
+        //     for (let i=0; i<numberOfPages; i++) {
+        //         $('.pagiation_selector').append(`<button class="btn btn-primary" value="${i+1}">${i+1}</button>`)
+        //     }
+        // }
+    }
+   
+    //document.getElementById("page").innerHTML = currentPage + "/" + numberOfPages;
 
-// const listArray = []
-// for (let i = 0; i < 40; i++) {
-//     listArray.push(`<li class="list-group-item">${i}</li>`)
-// }
 
-// const numberOfItems = listArray.length
-// const numberPerPage = 5
-// const currentPage = 1
-// const numberOfPages = Math.ceil(numberOfItems/numberPerPage)
+    function buildPage(currPage) {
+        const trimStart = (currPage -1) * numberPerPage
+        const trimEnd = trimStart + numberPerPage
+        // BEISPIEL: if currentPage =1
+        // const trimStart = (1 - 1) * 5 = 0
+        // const trimEnd = 0 + 5 = 5
 
-// const trimStart = (currPage - 1) * numberPerPage
-// const trimEnd = trimStart + numberPerPage
+        console.log(taglist.slice(trimStart, trimEnd))
+        $(".discovery_results").empty().append(taglist.slice(trimStart, trimEnd))
+    }
 
-// // //if currentPage =1
-// // const trimStart = (1 - 1) * 5 = 0
-// // const trimEnd = 0 + 5 = 5
+    $(document).ready(function(){
+        buildPage(1)
+        buildPagination(currentPage)
+        $('.pagination_selection').on('click', 'button', function() {
+            var clickedPage = parseInt($(this).val())
+            buildPage(clickedPage)
+            buildPagination(clickedPage, numberOfPages)
+       });
+    });
 
-// // //if currentPage = 2
+    //Alternative ?!?!
 
-// function buildPage(currPage) {
-//     const trimStart = ()
-// }
+    // const updateBtn = () => {
+    //     if(currentPage === numberOfPages){
+    //         nextBtn.disabled = true;
+    //     } else if (currentPage === 0) {
+    //         startBtn.disabled = true;
+            
+    //     }
+    // }
+
+    // function startBtn(){
+    //     if (currentPage > 1) {
+    //         currentPage--;
+    //     } else {
+    //         // do nothing
+    //     }
+    // }
+
+    // function nextBtn() {
+    //     if (currentPage < numberOfPages) {
+    //         currentPage ++;
+    //     }
+    // }
+
+}
 
 
 // Wait for the page to fully load its DOM content, then call updateLocation
 document.addEventListener("DOMContentLoaded", () => {
     updateLocation();
+    pagination();
 });
