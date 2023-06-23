@@ -1,0 +1,59 @@
+@host = http://localhost:3000
+@api = /api/geotags
+
+
+
+### GET start page //working
+GET {{host}}
+
+
+### GET with only searchterm present
+
+GET {{host}}{{api}}
+Content-Type: application/application/json
+
+{
+    "searchterm" : "Building"
+}
+
+
+### GET with latitude, longitude only present
+
+GET {{host}}{{api}}
+
+
+### GET with latitude, longitude, searchterm present
+
+GET {{host}}{{api}}
+
+
+### POST new GeoTag (nach jedem Post sollte sich die ID um 1 erhöhen) //working
+
+POST {{host}}{{api}}
+Content-Type: application/json
+
+{
+    "name" : "NewGeoTag",
+    "hashtag" : "#newtag"
+}
+
+
+### GET GeoTag by ID (ID = IWI) //working
+
+GET {{host}}{{api}}/1
+
+
+### PUT replace existing GeoTag //working
+
+PUT {{host}}{{api}}/2
+Content-Type: application/json
+
+{
+    "name" : "Replaced",
+    "hashtag" : "#replace"
+}
+
+
+### DELETE existing GeoTag (ID 0 = Castle) //working
+
+DELETE {{host}}{{api}}/0
