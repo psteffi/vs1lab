@@ -194,7 +194,7 @@ ul li {
 <button class="button-4" role="button">Button 4</button>
 
 /* CSS */
-/* .button {
+.button {
   appearance: none;
   background-color: #FAFBFC;
   border: 1px solid rgba(27, 31, 35, 0.15);
@@ -237,7 +237,7 @@ ul li {
   background-color: #EDEFF2;
   box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 inset;
   transition: none 0s;
-} */
+}
 
 /* ### TODO ### Styles for Footer Component */
 
