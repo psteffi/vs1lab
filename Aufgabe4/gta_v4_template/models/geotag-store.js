@@ -70,7 +70,7 @@ class InMemorygeotagStore{
 
     // Remove
     remove(name) {
-        this.#store = this.#store.filter(geotag => geotag.name !== name);
+        this.#store = this.#store.filter(geotag => geotag.name != name);
     }
 
     // getNearby

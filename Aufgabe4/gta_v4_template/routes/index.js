@@ -117,9 +117,7 @@ router.get('/api/geotags', (req, res) => {
     taglist = database.getAll();
   }
 
-  res.render('index', {
-    taglist : JSON.parse(taglist),
-  });
+  res.json(taglist);
 })
 
 /**
@@ -168,9 +166,7 @@ router.get('/api/geotags/:id', (req, res) => {
   const id = req.params.id;
 //--- finde den GeoTag mit dieser id und übergebe sie an geotag ---//
   let geotag = database.getGeoTagById(id);
-  res.render('index', {
-    geotag : JSON.parse(geotag)
-  });
+  res.json(geotag);
 })
 
 /**
@@ -200,9 +196,7 @@ router.put('/api/geotags/:id', (req, res) =>  {
 //--- finde den GeoTag mit angegebener ID und ersetze seine Attribute ---//
   let geotag = database.replaceGeoTagById(id, new GeoTag(latitude, longitude, name, hashtag));
 
-  res.render('index', {
-    geotag : JSON.parse(geotag)
-  });
+  res.json(geotag);
 })
 
 
@@ -227,9 +221,7 @@ router.delete('/api/geotags/:id', (req, res) => {
 //--- lösche den GeoTag anhand seines Namens ---//
   database.remove(geotag.name);
 
-  res.render('index', {
-    geotag : JSON.parse(geotag)
-  });
+  res.json(geotag);
 })
 
 module.exports = router;
