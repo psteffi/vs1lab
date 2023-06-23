@@ -103,7 +103,7 @@ router.get('/api/geotags', (req, res) => {
   const longitude = parseFloat(req.body.longitude);
   const searchterm = req.body.searchterm;
 
-//--- sind latitude und longitude gegen, wird auf searchterm geprüft ---//
+//--- sind latitude und longitude gegeben, wird auf searchterm geprüft ---//
   if (latitude && longitude) {
 //--- ist searchterm: es wird auch nach searchterm gefiltert ---//
     if (searchterm) {
