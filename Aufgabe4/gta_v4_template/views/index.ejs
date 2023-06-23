@@ -23,6 +23,11 @@
         </nav>
     </header>
 
+    <!-- Messages -->
+    <!-- <div class="message" id="failure"></div>
+    <div class="message" id="successful"></div> -->
+    
+
     <main class="main row">
         <section class="main__tagging tagging col-3">
             <h2>Tagging</h2>
@@ -115,6 +120,12 @@
                             <li><%= gtag.name %> ( <%= gtag.latitude %>,<%= gtag.longitude %>) <%= gtag.hashtag %> </li>
                         <% }); %>
                     </ul>
+                    <!-- Paging -->
+                    <div class="discovery__paging">
+                        <button class="discovery__paging__button" type="button" id="discoveryPagingPreviousButton"> < </button>
+                        <div class="discovery__paging" id="discoveryPagingIndexes"></div>
+                        <button class="discovery__paging__button" type="button" id="discoveryPagingNextButton"> > </button>
+                    </div>
                 </div>
 
                 <div class="discovery__map col-8">
@@ -127,7 +138,7 @@
     </main>
 
     <footer class="footer">
-        <span>(c) 2021/22 HKA_IWI_VSYS</span>
+        <span> © 2023 HKA_IWI_VSYS_PH_SP_LK</span>
     </footer>
 
     <!-- Load JavaScripts
