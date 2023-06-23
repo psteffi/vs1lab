@@ -112,7 +112,7 @@ router.get('/api/geotags', (req, res) => {
     } else {
       taglist = database.getNearby(latitude, longitude, 1);
     }
-//ansonsten sollen alle angezeigt werden ---//
+//--- ansonsten sollen alle angezeigt werden ---//
   } else { 
     taglist = database.getAll();
   }
