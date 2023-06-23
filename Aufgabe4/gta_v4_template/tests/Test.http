@@ -7,30 +7,28 @@
 GET {{host}}
 
 
-### GET with latitude, longitude, searchterm present (Koordinaten IWI) //working
+### GET with latitude, longitude, searchterm present //working
 
 GET {{host}}{{api}}
 Content-Type: application/json
 
 {
+//--- Koordinaten der IWI (beliebige Zahlen reichen) ---//
     "latitude" : 49.01379,
     "longitude" : 8.390071,
     "searchterm" : "#campus"
 }
 
 
-### GET with latitude, longitude only present (Koordinaten IWI)
+### GET with latitude, longitude only present (nicht mehr nach searchterm filtern)
 
 GET {{host}}{{api}}
 Content-Type: application/json
 
 {
-//--- Koordinaten IWI ---//
-  //  "latitude" : 49.01379,
-   // "longitude" : 8.390071
-//--- Koordinaten HS Mannheim ---//
-   "latitude" : 49.47009,
-   "longitude" : 8.48240
+//--- Koordinaten IWI (beliebige Zahlen reichen ---//
+    "latitude" : 49.01379,
+    "longitude" : 8.390071
 }
 
 
@@ -52,7 +50,7 @@ GET {{host}}{{api}}/1
 
 ### PUT replace existing GeoTag //working
 
-PUT {{host}}{{api}}/2
+PUT {{host}}{{api}}/1
 Content-Type: application/json
 
 {
