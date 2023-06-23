@@ -184,8 +184,8 @@ ul li {
 /* ### TODO ### Pagination Position Styling */
 .pagination_selection {
   margin-top: 1em;
-  display: inline-block;
   justify-content: center;
+  display: inline-flex;
   position: relative; 
 }
 
