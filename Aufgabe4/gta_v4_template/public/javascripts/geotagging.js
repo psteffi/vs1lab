@@ -84,22 +84,6 @@ async function taggingHandler(submitEvent) {
         })
     });
 
-    if (!response.ok) {
-        let errorMessageBox = document.getElementById("failure");
-        console.log("failed add attempt");
-        errorMessageBox.textContent = "Error while adding Geotag";
-        errorMessageBox.style.display = "block";
-        return;
-    }
-
-    let successMessageBox = document.getElementById("successful");
-    successMessageBox.textContent = "GeoTag added";
-    console.log("Tag added");
-    successMessageBox.style.display = "block";
-    setTimeout(() => {
-        successMessageBox.style.display = "none";
-    }, 6000);
-
     geotagMap(await (await fetch("/api/geotags")).json());
 }
 
@@ -108,7 +92,7 @@ async function discoveryHandler(submitEvent) {
     const [lat, long] = updateLocation();
     const query = document.getElementById("searchterm").value;
     let url = `/api/geotags?latitude=${lat}&longitude=${long}`;
-    f (query !== "")
+    if (query !== "")
         url += `&searchTerm=${encodeURIComponent(query)}`
     const response = await fetch(url);
     const responseBody = await response.json();
