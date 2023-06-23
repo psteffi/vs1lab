@@ -29,4 +29,3 @@ class GeoTag {
 }
 
 module.exports = GeoTag;
-// module.exports = GeoTagStore;

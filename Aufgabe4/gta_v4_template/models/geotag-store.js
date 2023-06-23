@@ -30,6 +30,8 @@ class InMemorygeotagStore{
 
     // TODO: ... your code here ...
     #store = [];
+//--- jeder GeoTag soll nun eine ID bekommen ---//
+    #id = 0;
 
 
     // Get all
@@ -41,8 +43,29 @@ class InMemorygeotagStore{
     // Add
     add(geotag) {
         
+//--- dem GeoTag eine neue ID hinzufügen ---//
+        geotag.id = this.#id;   //--- beim ersten erstellten GeoTag ist die ID = 0 (siehe Konstruktor)
         this.#store.push(geotag)
         console.log(this.#store)
+//--- für den nächsten GeoTag soll die ID um eins erhöht werden, sodass keine zwei Tags dieselbe ID haben ---//
+//--- durch Postinkrement wird die ID erst nach return erhöht, sodass nun die ID des eben erstellten GeoTags zurückgegeben wird ---//
+        return this.#id++;
+    }
+
+//--- Methode, die einen GeoTag anhand seiner ID finden und zurückgeben soll ---//
+    getGeoTagById(id) {
+        return this.#store.find(geotag => geotag.id == id);
+    }
+
+//--- Methode, die einen GeoTag mit neuen Werten ersetzen soll ---//
+//--- Parameter: Bisherige ID, neuer GeoTag (also die neuen Werte) ---//
+    replaceGeoTagById(id, geotag) {
+//--- in #store werden nun nur noch alle GeoTags angegeben, die nicht der ID (Parameter) entsprechen ---//
+        this.#store = this.#store.filter(geotag => geotag.id != id);
+        geotag.id = id;
+//--- GeoTag mit gleicher ID und neu eingefügten Werten wird in den #store gepusht ---//
+        this.#store.push(geotag);
+        return geotag;
     }
 
     // Remove
