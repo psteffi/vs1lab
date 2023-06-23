@@ -183,21 +183,10 @@ ul li {
 
 /* ### TODO ### Pagination Position Styling */
 .pagination_selection {
-  
-  position: relative; 
-}
-
-/* ### TODO ### Pagination Styling */
-.pagination_selection{
+  margin-top: 1em;
   display: inline-block;
-  text-align: center;
-  padding: 20px;
-  border-radius: 8px;
-  column-gap: 12px;
-  background: #fff;
-  box-shadow: 0 5px 10px rgba(0x 0x 0x 0.1);
-  color: black;
-  text-decoration: none;
+  justify-content: center;
+  position: relative; 
 }
 
 /*
@@ -205,7 +194,7 @@ ul li {
 <button class="button-4" role="button">Button 4</button>
 
 /* CSS */
-.button {
+/* .button {
   appearance: none;
   background-color: #FAFBFC;
   border: 1px solid rgba(27, 31, 35, 0.15);
@@ -248,7 +237,7 @@ ul li {
   background-color: #EDEFF2;
   box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 inset;
   transition: none 0s;
-}
+} */
 
 /* ### TODO ### Styles for Footer Component */
 
