@@ -19,11 +19,13 @@ Content-Type: application/json
 }
 
 
-### GET with latitude, longitude only present (Koordinaten IWI)
+### GET with latitude, longitude only present
 
 GET {{host}}{{api}}
 Content-Type: application/json
 
+//--- in latitude und longitude muss nur irgendeine Zahl stehen, welche ist dabei egal ---//
+//--- das ist nicht so dolle, I guess ---//
 {
 //--- Koordinaten IWI ---//
   //  "latitude" : 49.01379,
@@ -40,24 +42,28 @@ POST {{host}}{{api}}
 Content-Type: application/json
 
 {
-    "name" : "NewGeoTag",
-    "hashtag" : "#newtag"
+    "latitude" : 49.01486,
+    "longitude" : 8.39407,
+    "name" : "Mensa",
+    "hashtag" : "#campus"
 }
 
 
-### GET GeoTag by ID (ID = IWI) //working
+### GET GeoTag by ID (ID 1 = IWI) //working
 
 GET {{host}}{{api}}/1
 
 
 ### PUT replace existing GeoTag //working
 
-PUT {{host}}{{api}}/2
+PUT {{host}}{{api}}/1
 Content-Type: application/json
 
 {
+    "latitude" : 49.01379,
+    "longitude" : 8.390071,
     "name" : "Replaced",
-    "hashtag" : "#replace"
+    "hashtag" : "#replaced"
 }
 
 

@@ -55,11 +55,10 @@
 					<label for="hashtag">Hashtag:</label>
 
 					<input type="text" id="hashtag" name="hashtag"
-				       minlength="2" maxlength="10" size="15" placeholder="#University" pattern="[#][A-Za-z0-9] {1, 11}">
+				       minlength="2" maxlength="11" size="15" placeholder="#University" pattern="[#].{1,11}">
 					   
 					   
 					<button type="submit">Add new GeoTag</button>
-					
 						
 					   
 				</fieldset>
@@ -92,7 +91,7 @@
 					   
 					<input type="hidden" id="longitudesearch" name="longitudesearch" value="<%= locals.longitude ?? "" %>">
 					   
-					<button id = "submitGeoTag"
+					<button id = "searchGeoTag"
 					        type="submit">
 					    Search
 					</button>
