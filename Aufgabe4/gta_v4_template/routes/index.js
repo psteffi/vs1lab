@@ -61,8 +61,8 @@ router.post('/tagging', (req, res) => {
 
 router.post('/discovery', (req, res) => {
   const searchRadius = 1;
-  const latitude = parseFloat(req.body.latitudesearch);
-  const longitude = parseFloat(req.body.longitudesearch);
+  const latitude = req.body.latitudesearch;
+  const longitude = req.body.longitudesearch;
   let taglist = [];
  
   if (req.body.searchterm) {
@@ -99,8 +99,8 @@ router.post('/discovery', (req, res) => {
 router.get('/api/geotags', (req, res) => {
 
   let taglist = [];
-  const latitude = parseFloat(req.body.latitude);
-  const longitude = parseFloat(req.body.longitude);
+  const latitude = req.body.latitude;
+  const longitude = req.body.longitude;
   const searchterm = req.body.searchterm;
 
 //--- sind latitude und longitude gegeben, wird auf searchterm geprüft ---//
@@ -135,8 +135,8 @@ router.get('/api/geotags', (req, res) => {
 
   router.post('/api/geotags', (req, res) => {
 
-    const latitude = parseFloat(req.body.latitudesearch);
-    const longitude = parseFloat(req.body.longitudesearch);
+    const latitude = req.body.latitudesearch;
+    const longitude = req.body.longitudesearch;
     const name = req.body.name;
     const hashtag = req.body.hashtag;
 
@@ -188,8 +188,8 @@ router.get('/api/geotags/:id', (req, res) => {
 router.put('/api/geotags/:id', (req, res) =>  {
 
   const id = req.params.id;
-  const latitude = parseFloat(req.body.latitudesearch);
-  const longitude = parseFloat(req.body.longitudesearch);
+  const latitude = req.body.latitudesearch;
+  const longitude = req.body.longitudesearch;
   const name = req.body.name;
   const hashtag = req.body.hashtag;
 

@@ -5,40 +5,49 @@
 
 console.log("The geoTagging script is going to start...");
 
+var mapM = new MapManager("BvSIZ5qQ0kchef3XsC2M3bhrzefd11vE");
 
 
-function mapUrl(lat, long, taglist) {
+// Funktion zum anfordern der MapURL
+function mapUrl(lat, long) {//, taglist) {
     console.log("calling mapUrl");
-    var mapM = new MapManager("BvSIZ5qQ0kchef3XsC2M3bhrzefd11vE");
+    //var mapM = new MapManager("BvSIZ5qQ0kchef3XsC2M3bhrzefd11vE");
     const mapView = document.getElementById('mapView');
-    const mapurl = mapM.getMapUrl(lat, long, taglist, 16); //JSON.parse(imageElement.dataset.tags), 16);
+    const mapurl = mapM.getMapUrl(lat, long, JSON.parse(mapView.dataset.tags), 16); //taglist, 16);
     mapView.setAttribute("src", mapurl);
 }
 
+// Funktion zum rendern der GeoTags
 function geotagMap(taglist){
     console.log("calling geotagMap");
     const geotaglist = document.getElementById("discoveryResults");
     // Populate result list
     geotaglist.replaceChildren(...taglist.map((geotag) => {
         let listElement = document.createElement("li");
-        listElement.innerHTML = `${geotag.name} (${geotag.latitude}, ${geotag.longitude}), ${geotag.hashtag})`;
+        listElement.innerHTML = `${geotag.name}, (${geotag.latitude}, ${geotag.longitude}), ${geotag.hashtag}`;
         return listElement;
     }));
     // Populate image element data-* tag
     document.getElementById("mapView").dataset.tags = JSON.stringify(taglist);
-    mapUrl(...updateLocation());
+    mapUrl(document.getElementById('latitude').value, document.getElementById('longitude').value);
+    //mapUrl(...updateLocation());
 }
 
-// var mapM = new MapManager("BvSIZ5qQ0kchef3XsC2M3bhrzefd11vE");
-const searchButton = document.getElementById('submitGeoTag');
-
-
 function parseTags() {
-    var taglist = [];
+    console.log("parseTags()");
     const imageElement = document.getElementById('mapView');
     const taglist_json = imageElement.getAttribute('data-tags');
     return JSON.parse(taglist_json);
 }
+
+function renderMap(latitude, longitude) {
+    console.log("renderMap");
+    const taglist = parseTags();	
+    const mapView = document.getElementById('mapView');	
+    const mapurl = mapM.getMapUrl(latitude, longitude, taglist, 16);	
+    mapView.setAttribute("src", mapurl);
+}
+
 
 function callback(position) {
     console.log("Loading callback(position)");
@@ -48,9 +57,15 @@ function callback(position) {
     document.getElementById('latitudesearch').value = position.latitude;
     document.getElementById('longitudesearch').value = position.longitude;
 
-    const taglist = parseTags();
-    mapUrl(position.latitude, position.longitude, taglist);
+    //const taglist = parseTags();
+    //mapUrl(position.latitude, position.longitude); //, taglist);
 
+    // const taglist = parseTags();	
+    // const mapView = document.getElementById('mapView');	
+    // const mapurl = mapM.getMapUrl(position.latitude, position.longitude, taglist, 16);	
+    // mapView.setAttribute("src", mapurl);
+
+    renderMap(position.latitude, position.longitude);
 }
 
 
@@ -62,41 +77,64 @@ function updateLocation(){
     if (lat === undefined || lat === "" || lat === "0") {
         console.log("Locating Device")
         LocationHelper.findLocation(callback);
-    }
+    } else {
+        // }else {
+        //     mapUrl(lat, long);
+        // }
 
-    return [lat.value, long.value];
-    //const taglist = parseTags();
-    //mapUrl(position.lat, position.long, taglist);
+        //return [lat, long];
+        //const taglist = parseTags();
+        //mapUrl(position.lat, position.long, taglist);
+
+        renderMap(lat, long);
+    }
 }
 
 async function taggingHandler(submitEvent) {
+    console.log("taggingHandler");
     submitEvent.preventDefault();
-    const response = await fetch("/api/geotags", { // api -> REST-api, Steffi
+
+
+    await fetch("/api/geotags", { // api -> REST-api, Steffi
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            lat: document.getElementById('latitude').value,
-            long: document.getElementById('longitude').value,
-            name: document.getElementById('name').value,
-            hashtag: document.getElementById('hashtag').value
+            latitude: document.getElementById("latitude").value,
+            longitude: document.getElementById("longitude").value,
+            name: document.getElementById("name").value,
+            hashtag: document.getElementById("hashtag").value
         })
     });
-
+    
+    //updateLocation(await (await fetch("/api/geotags")).json());
     geotagMap(await (await fetch("/api/geotags")).json());
 }
 
 async function discoveryHandler(submitEvent) {
+    console.log("discoveryHandler");
     submitEvent.preventDefault();
-    const [lat, long] = updateLocation();
+
+    const lat = document.getElementById("latitudesearch").value;
+    const long = document.getElementById("longitudesearch").value;
     const query = document.getElementById("searchterm").value;
+
+    const imageElement = document.getElementById('mapView');
+
     let url = `/api/geotags?latitude=${lat}&longitude=${long}`;
+    
     if (query !== "")
         url += `&searchTerm=${encodeURIComponent(query)}`
+    
+    console.log(url);
     const response = await fetch(url);
     const responseBody = await response.json();
-    geotagMap(responseBody);
+    console.log(JSON.stringify(responseBody));
+
+    imageElement.setAttribute('data-tags', JSON.stringify(responseBody));
+    updateLocation();
+    //geotagMap(responseBody);
 }
 
 // Wait for the page to fully load its DOM content, then call updateLocation
