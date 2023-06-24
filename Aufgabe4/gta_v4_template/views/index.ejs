@@ -55,7 +55,7 @@
 					<label for="hashtag">Hashtag:</label>
 
 					<input type="text" id="hashtag" name="hashtag"
-				       minlength="2" maxlength="10" size="15" placeholder="#University" pattern="[#][A-Za-z0-9] {1, 11}">
+				       minlength="2" maxlength="10" size="15" placeholder="#University" pattern="[#].{1,11}" />
 					   
 					   
 					<button type="submit">Add new GeoTag</button>
@@ -109,12 +109,17 @@
             <div class="discovery__wrapper row">
                 <div class="discovery__taglist col-4">
                     <ul class="discovery__results" id="discoveryResults">
-                        <!-- <li>Castle (49.01379, 8.404435) #sight</li>
-                        <li>IWI (49.01379, 8.390071) #edu</li> -->
-                        <% if (taglist !== undefined) taglist.forEach(function(gtag) { %>
-                            <li><%= gtag.name %> ( <%= gtag.latitude %>,<%= gtag.longitude %>) <%= gtag.hashtag %> </li>
-                        <% }); %>
+                        <li>This search returned no results.</li>
                     </ul>
+                    <div class="paginationContainer">
+                        <button id="paginationPrev" class="paginationButton">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                        </button>
+                        <div id="pageNumber"></div>
+                        <button id="paginationNext" class="paginationButton">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </button>
+                    </div>
                 </div>
 
                 <div class="discovery__map col-8">

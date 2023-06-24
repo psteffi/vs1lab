@@ -142,19 +142,19 @@ header{
 }
 
 #latitude {
-  height: 40px;
+  height: 50px;
 }
 
 #longitude {
-  height: 40px;
+  height: 50px;
 }
 
 #name {
-  height: 40px;
+  height: 50px;
 }
 
 #hashtag {
-  height: 40px;
+  height: 50px;
 }
 
 
@@ -167,17 +167,41 @@ header{
 }
 
 #searchterm {
-  height: 40px;
+  height: 50px;
 }
 
 ul li {
 
   border: solid #cdcdcd;
-  width: 250px;
-  height: 40px;
+  width: 275px;
+  height: 50px;
   background-color: #e5e5e5;
   color: #00B7FF;
   list-style-type: none;
+}
+
+/* Paging */
+
+.paginationContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2em;
+}
+
+.paginationButton {
+  padding: 5px;
+  border: 2px solid var(--palette-green);
+  background-color: var(--palette-green);
+}
+
+.paginationButton:hover {
+  cursor: pointer;
+  box-shadow: 5px 5px 15px -8px var(--palette-green);
+}
+
+.paginationButton[disabled] {
+  cursor: default;
 }
 
 
