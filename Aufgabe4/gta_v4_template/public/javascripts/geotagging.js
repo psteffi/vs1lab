@@ -39,15 +39,11 @@ function updateLocation(){
     } else {
         updateURL(lat, long);
     }
-
-    //return [lat, long];
 }
 
 
-//------------------ neu ------------------//
 
 //--- aktualisiere die map URL ---//
-
 function updateURL(latitude, longitude) {
     console.log("updateURL");
     const taglist = parseTags();
@@ -59,12 +55,11 @@ function updateURL(latitude, longitude) {
 
 
 //--- GeoTags rendern ---//
-
 function renderGeoTags(taglist) {
     console.log("calling 'renderGeoTags'");
     const geotaglist = document.getElementById("discoveryResults");
 
-    //fill the list//
+    //fülle die Liste mit entsprechenden und zutreffenden GeoTags (Inhalt: ihre Attribute)//
     geotaglist.replaceChildren(...taglist.map((geotag) => {
         let listElement = document.createElement("li");
         listElement.innerHTML = `${geotag.name} (${geotag.latitude}, ${geotag.longitude}) ${geotag.hashtag}`;
@@ -72,10 +67,8 @@ function renderGeoTags(taglist) {
     }));
 
     const mapView = document.getElementById("mapView");
-//--- Tags werden direkt auf der Karte angezeigt ---//
-//--- → Fehler: benutze setAttribute statt getAttribute = taglist ---//
     mapView.setAttribute("data-tags", JSON.stringify(taglist));
-
+    //aktualisiere die Map URL//
     updateURL(document.getElementById("latitude").value, document.getElementById("longitude").value);
 }
 
@@ -85,6 +78,7 @@ async function taggingHandler(submitEvent) {
     // dafür da, dass nicht in '/tagging' geladen wird //
     submitEvent.preventDefault();
     
+    //erwarte ein POST auf /api/geotags//
     await fetch("/api/geotags", {
         method : "POST",
         headers: {
@@ -99,6 +93,7 @@ async function taggingHandler(submitEvent) {
         })
     });
 
+    //zeige auch den neuen GeoTag an (erwarte ein JSON Objekt von /api/geotags)//
     renderGeoTags(await (await fetch ("/api/geotags")).json());
 }
 
@@ -112,16 +107,21 @@ async function discoveryHandler(submitEvent) {
     const longitude = document.getElementById("longitude").value;
     const query = document.getElementById("searchterm").value;
 
+    //in der query der URL stehen die latitude und longitude Attribute//
     let url = `/api/geotags?latitude=${latitude}&longitude=${longitude}`;
 
+    //falls die query nicht leer ist, soll auch der searchterm zur url angefügt werden//
     if (query != "") {
         url += `&searchterm=${encodeURIComponent(query)}`;
     }
 
+    //erwarte eine URL//
     const response = await fetch(url);
+    //erwarte die responses nun als JSON Objekt//
     const responseBody = await response.json();
 
     const mapView = document.getElementById("mapView");
+    //aktualisiere die Karte anhand des reponseBodys als mapurl//
     mapView.setAttribute("data-tags", JSON.stringify(responseBody));
     updateLocation();
 }
