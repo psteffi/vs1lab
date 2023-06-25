@@ -72,8 +72,10 @@ function renderGeoTags(taglist) { //"geotagMap"
     }));
 
     const mapView = document.getElementById("mapView");
-    mapView.getAttribute('data-tags') = JSON.stringify(taglist);
-    
+//--- Tags werden direkt auf der Karte angezeigt ---//
+//--- → Fehler: benutze setAttribute statt getAttribute = taglist ---//
+    mapView.setAttribute("data-tags", JSON.stringify(taglist));
+
     updateURL(document.getElementById("latitude").value, document.getElementById("longitude").value);
 }
 
@@ -113,7 +115,7 @@ async function discoveryHandler(submitEvent) {
     submitEvent.preventDefault();
 
     const latitude = document.getElementById("latitude").value;
-    const longitude = docmuent.getElementById("longitude").value;
+    const longitude = document.getElementById("longitude").value;
     const query = document.getElementById("searchterm").value;
 
     let url = `/api/geotags?latitude=${latitude}&longitude=${longitude}`;
@@ -127,7 +129,7 @@ async function discoveryHandler(submitEvent) {
     //renderGeoTags(responseBody);
 
     const mapView = document.getElementById("mapView");
-    mapView.setAttribute(data-"data-tags", JSON.stringify(responseBody));
+    mapView.setAttribute("data-tags", JSON.stringify(responseBody));
     updateLocation();
 }
 
