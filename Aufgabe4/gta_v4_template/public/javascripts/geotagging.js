@@ -145,7 +145,7 @@ async function loadGeoTags(pageNumber, isNewQuery = false) {
     let nextPageBtn = document.getElementById("nextPage");
     let prevPageBtn = document.getElementById("prevPage");
     let resultList = document.getElementById("discoveryResults");
-    let totalPages = document.getElementById("pageNumber");
+    let currentPage = document.getElementById("pageNumber");
 
     const start = pageNumber * resultPageLength;
     const url = getUrlForPages(start, resultPageLength);
@@ -154,7 +154,7 @@ async function loadGeoTags(pageNumber, isNewQuery = false) {
         resultList.dataset.pageCount = await calcPageNumber(url);
     }
 
-    totalPages.innerHTLM = `${pageNumber + 1} / ${resultList.dataset.pageCount}`;
+    currentPage.innerHTLM = `${pageNumber + 1} / ${resultList.dataset.pageCount}`;
 
     prevPageBtn.dataset.page = pageNumber - 1;
     prevPageBtn.disabled = pageNumber <= 0;
@@ -166,7 +166,6 @@ async function loadGeoTags(pageNumber, isNewQuery = false) {
 }
 
 //--- berechne die benötigte Anzahl an Seiten, um alle GeoTags darstellen zu können ---//
-
 async function calcPageNumber(url) {
     return fetch(url.split("&limit=")[0])
         .then(resp => resp.json()
