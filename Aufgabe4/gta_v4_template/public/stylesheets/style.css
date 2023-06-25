@@ -180,6 +180,40 @@ ul li {
   list-style-type: none;
 }
 
+/* --- Pagination Start --- */
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1em;
+  margin-right: 2em;
+  gap: 2em;
+}
+
+.pageButton {
+  padding: 5px;
+  border: 2px;
+  box-sizing: border-box;
+  /* runde Ecken */
+  border-radius: 3px;
+  background-color: rgb(169, 208, 235);
+  color: black;
+}
+
+
+.pageButton:hover {
+  cursor: pointer;
+  background-color: rgb(120, 163, 194);
+}
+
+.pageButton:disabled {
+  background-color: #cdcdcd;
+  cursor: default;
+}
+
+/* --- Pagination End --- */
+
 
 /* ### TODO ### Styles for Footer Component */
 
