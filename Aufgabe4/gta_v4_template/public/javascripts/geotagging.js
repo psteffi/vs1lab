@@ -163,7 +163,7 @@ async function loadGeoTags(pageNumber, isNewQuery = false) {
         resultList.dataset.pageCount = await calcPageNumber(url);
     }
 
-    currentPage.innerHTLM = `${pageNumber + 1} / ${resultList.dataset.pageCount}`;
+    currentPage.innerText = `${pageNumber + 1} / ${resultList.dataset.pageCount}`;
 
     prevPageBtn.dataset.page = pageNumber - 1;
     prevPageBtn.disabled = pageNumber <= 0;
