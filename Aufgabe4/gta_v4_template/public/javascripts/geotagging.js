@@ -74,7 +74,7 @@ function renderGeoTags(taglist) {
     const mapView = document.getElementById("mapView");
     mapView.getAttribute('data-tags') = JSON.stringify(taglist);
     
-    updateURL(...updateLocation());
+    updateURL(document.getElementById("latitude").value, document.getElementById("longitude").value);
 }
 
 
