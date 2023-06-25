@@ -52,7 +52,6 @@ function updateLocation(){
 
 
 //--- aktualisiere die map URL ---//
-
 function updateURL(latitude, longitude) {
     console.log("updateURL");
     const taglist = parseTags();
@@ -64,23 +63,24 @@ function updateURL(latitude, longitude) {
 
 
 //--- GeoTags rendern ---//
-
 function renderGeoTags(taglist) {
     console.log("calling 'renderGeoTags'");
     const geotaglist = document.getElementById("discoveryResults");
 
     //--- handle empty list ---//
     if (taglist.length == 0) {
+        const noResultsMessage = document.createElement("li");
+        noResultsMessage.innerHTML = "No results.";
+        geotaglist.replaceChildren(noResultsMessage);
         document.getElementById("pageNumber").innerHTML = "0 / 0";
+    } else {
+        //fill the list//
+        geotaglist.replaceChildren(...taglist.map((geotag) => {
+            let listElement = document.createElement("li");
+            listElement.innerHTML = `${geotag.name} (${geotag.latitude}, ${geotag.longitude}) ${geotag.hashtag}`;
+            return listElement;
+        }));
     }
-
-
-    //fill the list//
-    geotaglist.replaceChildren(...taglist.map((geotag) => {
-        let listElement = document.createElement("li");
-        listElement.innerHTML = `${geotag.name} (${geotag.latitude}, ${geotag.longitude}) ${geotag.hashtag}`;
-        return listElement;
-    }));
 
     const mapView = document.getElementById("mapView");
     mapView.setAttribute("data-tags", JSON.stringify(taglist));
