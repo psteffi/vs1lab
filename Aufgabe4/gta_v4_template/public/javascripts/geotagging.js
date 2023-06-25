@@ -7,7 +7,7 @@ console.log("The geoTagging script is going to start...");
 
 //--- Pagination Start ---//
 
-const resultPageLength = 7;
+const resultPageLength = 8;
 
 //--- Pagination End ---//
 
