@@ -105,7 +105,7 @@ router.get('/api/geotags', (req, res) => {
 
 //--- sind latitude und longitude gegeben, wird auf searchterm geprüft ---//
   if (latitude && longitude) {
-//--- ist searchterm: es wird auch nach searchterm gefiltert ---//
+//--- ist searchterm gegeben: es wird auch nach searchterm gefiltert ---//
     if (searchterm) {
       taglist = database.searchNearby(latitude, longitude, 1, searchterm);
 //--- ist searchterm nicht gegeben, werden Tags nach aktuellem Radius gesucht ---//

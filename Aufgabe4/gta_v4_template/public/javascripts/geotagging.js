@@ -8,7 +8,7 @@ console.log("The geoTagging script is going to start...");
 var mapM = new MapManager("BvSIZ5qQ0kchef3XsC2M3bhrzefd11vE");
 
 
-function parseTags() { //"mapUrl"
+function parseTags() {
     const imageElement = document.getElementById('mapView');
     const taglist_json = imageElement.getAttribute('data-tags');
     return JSON.parse(taglist_json);
@@ -48,7 +48,7 @@ function updateLocation(){
 
 //--- aktualisiere die map URL ---//
 
-function updateURL(latitude, longitude) { //"renderMap"
+function updateURL(latitude, longitude) {
     console.log("updateURL");
     const taglist = parseTags();
     const mapurl = mapM.getMapUrl(latitude, longitude, taglist, 16);
@@ -60,7 +60,7 @@ function updateURL(latitude, longitude) { //"renderMap"
 
 //--- GeoTags rendern ---//
 
-function renderGeoTags(taglist) { //"geotagMap"
+function renderGeoTags(taglist) {
     console.log("calling 'renderGeoTags'");
     const geotaglist = document.getElementById("discoveryResults");
 
@@ -81,10 +81,6 @@ function renderGeoTags(taglist) { //"geotagMap"
 
 
 //--- Tagging handling ---//
-//------ Seite muss neu geladen werden, sodass der GeoTag auf der Karte auftaucht ------//
-//------ in der Liste taucht er direkt auf ------//
-//------ neuer GeoTag taucht aber im VS Code Terminal direkt auf ------//
-//------ → das Aktualisieren der Karte allein funktioniert nicht richtig (?) ------//
 async function taggingHandler(submitEvent) {
     // dafür da, dass nicht in '/tagging' geladen wird //
     submitEvent.preventDefault();
@@ -108,8 +104,6 @@ async function taggingHandler(submitEvent) {
 
 
 //--- Discovery handling ---//
-//------ Suche wird überhaupt nicht ausgeführt ------//
-//------ also man kann auf den Button / Enter klicken, aber es passiert GAR nichts ------//
 async function discoveryHandler(submitEvent) {
     // dafür da, dass nicht in '/discovery' geladen wird //
     submitEvent.preventDefault();
@@ -126,7 +120,6 @@ async function discoveryHandler(submitEvent) {
 
     const response = await fetch(url);
     const responseBody = await response.json();
-    //renderGeoTags(responseBody);
 
     const mapView = document.getElementById("mapView");
     mapView.setAttribute("data-tags", JSON.stringify(responseBody));
