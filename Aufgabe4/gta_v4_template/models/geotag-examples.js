@@ -28,6 +28,10 @@ class GeoTagExamples {
             ['Building A', 49.015738, 8.391619, '#campus'],
             ['Building B', 49.016843, 8.391372, '#campus'],
             ['Building K', 49.013190, 8.392090, '#campus'],
+            ['Spielplatz', 49.011318, 8.420465, '#Oststadt'],
+            ['Döner', 49.009632, 8.423459, '#Oststadt'],
+            ['KIT Bibliothek', 49.010834, 8.416728, '#KIT']
+
         ];
     }
 }
