@@ -183,8 +183,8 @@ async function loadGeoTags(pageNumber, isNewQuery = false) {
 
     //klickt man auf den next Buttton, wird die pageNumber um 1 erhöht//
     nextPageBtn.dataset.page = pageNumber + 1;
-    //dieser Button soll disabled werden, wenn die aktuelle pageNumber der maximal benötigten Anzahl der Seiten entspricht (ist man auf Seite x/x, soll dieser Button nicht verwendbar sein)//
-    nextPageBtn.disabled = pageNumber == resultList.dataset.pageCount - 1;
+    //dieser Button soll disabled werden, wenn die aktuelle pageNumber der maximal benötigten Anzahl der Seiten oder mehr entspricht (ist man auf Seite x/x, soll dieser Button nicht verwendbar sein !auch bei 0/0 daher >=)//
+    nextPageBtn.disabled = pageNumber >= resultList.dataset.pageCount - 1;
 
     //erwarte die URL der pageNumber (die Tags auf dieser Seite sollen auf der Karte angezeigt werden)//
     renderGeoTags(await (await fetch (url)).json());
