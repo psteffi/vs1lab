@@ -5,6 +5,13 @@
 
 console.log("The geoTagging script is going to start...");
 
+//--- Pagination Start ---//
+
+const resultPageLength = 7;
+
+//--- Pagination End ---//
+
+
 var mapM = new MapManager("BvSIZ5qQ0kchef3XsC2M3bhrzefd11vE");
 
 
@@ -39,12 +46,9 @@ function updateLocation(){
     } else {
         updateURL(lat, long);
     }
-
-    //return [lat, long];
 }
 
 
-//------------------ neu ------------------//
 
 //--- aktualisiere die map URL ---//
 
@@ -64,6 +68,8 @@ function renderGeoTags(taglist) {
     console.log("calling 'renderGeoTags'");
     const geotaglist = document.getElementById("discoveryResults");
 
+    //--- handle empty list? ---//
+
     //fill the list//
     geotaglist.replaceChildren(...taglist.map((geotag) => {
         let listElement = document.createElement("li");
@@ -72,8 +78,7 @@ function renderGeoTags(taglist) {
     }));
 
     const mapView = document.getElementById("mapView");
-//--- Tags werden direkt auf der Karte angezeigt ---//
-//--- → Fehler: benutze setAttribute statt getAttribute = taglist ---//
+
     mapView.setAttribute("data-tags", JSON.stringify(taglist));
 
     updateURL(document.getElementById("latitude").value, document.getElementById("longitude").value);
@@ -99,7 +104,8 @@ async function taggingHandler(submitEvent) {
         })
     });
 
-    renderGeoTags(await (await fetch ("/api/geotags")).json());
+    //--- Startwert: 0, neue Anfrage: true ---//
+    loadGeoTags(0, true);
 }
 
 
@@ -108,6 +114,16 @@ async function discoveryHandler(submitEvent) {
     // dafür da, dass nicht in '/discovery' geladen wird //
     submitEvent.preventDefault();
 
+    //--- Startwert: 0, neue Anfrage: true ---//
+    loadGeoTags(0, true);
+}
+
+
+//--- Pagination Start ---//
+
+//--- URl erstellen, die die Seiten implementiert ---//
+//--- limit = -1 : letztes Element im Array ---//
+function getUrlForPages(start = 0, limit = -1) {
     const latitude = document.getElementById("latitude").value;
     const longitude = document.getElementById("longitude").value;
     const query = document.getElementById("searchterm").value;
@@ -118,14 +134,48 @@ async function discoveryHandler(submitEvent) {
         url += `&searchterm=${encodeURIComponent(query)}`;
     }
 
-    const response = await fetch(url);
-    const responseBody = await response.json();
+    url += `$start=${start}`;
+    if (limit != -1) {
+        url += `&limit=${limit}`;
+    }
 
-    const mapView = document.getElementById("mapView");
-    mapView.setAttribute("data-tags", JSON.stringify(responseBody));
-    updateLocation();
+    return url;
 }
 
+//--- isNewQuery default = false ---//
+async function loadGeoTags(pageNumber, isNewQuery = false) {
+    let nextPageBtn = document.getElementById("nextPage");
+    let prevPageBtn = document.getElementById("prevPage");
+    let resultList = document.getElementById("discoveryResults");
+    let totalPages = document.getElementById("pageNumber");
+
+    const start = pageNumber * resultPageLength;
+    const url = getUrlForPages(start, resultPageLength);
+
+    if (isNewQuery) {
+        resultList.dataset.pageCount = await calcPageNumber(url);
+    }
+
+    totalPages.innerHTLM = `${pageNumber + 1} / ${resultList.dataset.pageCount}`;
+
+    prevPageBtn.dataset.page = pageNumber - 1;
+    prevPageBtn.disabled = pageNumber <= 0;
+
+    nextPageBtn.dataset.page = pageNumber + 1;
+    nextPageBtn.disabled = pageNumber >= resultList.dataset.pageCount - 1;
+
+    renderGeoTags(await (await fetch (url)).json());
+}
+
+//--- berechne die benötigte Anzahl an Seiten, um alle GeoTags darstellen zu können ---//
+
+async function calcPageNumber(url) {
+    return fetch(url.split("&limit=")[0])
+        .then(resp => resp.json()
+            .then(body => Math.ceil(body.length / resultPageLength)));
+}
+
+//--- Pagination End ---//
 
 
 
@@ -134,4 +184,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     updateLocation();
     document.getElementById("tag-form").addEventListener("submit", taggingHandler);
     document.getElementById("discoveryFilterForm").addEventListener("submit", discoveryHandler);
+
+    //--- Pagination Buttons ---//
+    document.getElementById("nextPage").addEventListener("click", e => loadGeoTags(parseInt(e.currentTarget.dataset.page)));
+    document.getElementById("prevPage").addEventListener("click", e => loadGeoTags(parseInt(e.currentTarget.dataset.page)));
+    loadGeoTags(0, true);
 });

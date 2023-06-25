@@ -113,6 +113,16 @@
                             <li><%= gtag.name %> ( <%= gtag.latitude %>,<%= gtag.longitude %>) <%= gtag.hashtag %> </li>
                         <% }); %>
                     </ul>
+
+                    <!-- Pagination Start -->
+                    <div class="pagination">
+                        <button id="prevPage" class="pageButton"></button>
+                        <div id="pageNumber"></div>
+                        <button id="nextPage" class="pageButton"></button>
+                    </div>
+
+                    <!-- Pagination End -->
+
                 </div>
 
                 <div class="discovery__map col-8">

@@ -48,36 +48,8 @@ router.get('/', (req, res) => {
   res.render('index', { taglist: database.getAll() })
 });
 
-router.post('/tagging', (req, res) => {
-  database.add(new GeoTag(req.body.latitude, req.body.longitude, req.body.name, req.body.hashtag));
-  res.render('index', {
-    taglist: database.getAll(), 
-    query: req.body.query,
-    latitude: req.body.latitude,
-    longitude: req.body.longitude
-  });
-});
 
-
-router.post('/discovery', (req, res) => {
-  const searchRadius = 1;
-  const latitude = parseFloat(req.body.latitudesearch);
-  const longitude = parseFloat(req.body.longitudesearch);
-  let taglist = [];
- 
-  if (req.body.searchterm) {
-    taglist = database.searchNearby(latitude, longitude, searchRadius, req.body.searchterm);
-  } else {
-    taglist = database.getNearby(latitude, longitude, searchRadius);
-  }
-
-  res.render('index', {
-    taglist: taglist, 
-    query: req.body.searchterm,
-    latitude: latitude,
-    longitude: longitude
-  });
-})
+//--- alte Routen gelöscht ---//
 
 // API routes (A4)
 
@@ -116,6 +88,21 @@ router.get('/api/geotags', (req, res) => {
   } else { 
     taglist = database.getAll();
   }
+
+//--- Pagination start ---//
+
+  const start = parseInt(req.query.start);
+  const end = parseInt(req.query.limit);
+
+if (start) { //ist ein Startpunkt gegeben?
+  if (end) { //ist ein Endpunkt gegeben?
+    taglist = taglist.slice(start, start + end); //taglist soll aufgeteilt werden 
+  } else {
+    taglist = taglist.slice(start);
+  }
+}
+
+//--- Pagination end ---//
 
   res.json(taglist);
 })
