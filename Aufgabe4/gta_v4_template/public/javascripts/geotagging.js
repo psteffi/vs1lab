@@ -69,7 +69,11 @@ function renderGeoTags(taglist) {
     console.log("calling 'renderGeoTags'");
     const geotaglist = document.getElementById("discoveryResults");
 
-    //--- handle empty list? ---//
+    //--- handle empty list ---//
+    if (taglist.length == 0) {
+        document.getElementById("pageNumber").innerHTML = "0 / 0";
+    }
+
 
     //fill the list//
     geotaglist.replaceChildren(...taglist.map((geotag) => {
@@ -163,7 +167,7 @@ async function loadGeoTags(pageNumber, isNewQuery = false) {
         resultList.dataset.pageCount = await calcPageNumber(url);
     }
 
-    currentPage.innerText = `${pageNumber + 1} / ${resultList.dataset.pageCount}`;
+    currentPage.innerHTML = `${pageNumber + 1} / ${resultList.dataset.pageCount}`;
 
     prevPageBtn.dataset.page = pageNumber - 1;
     prevPageBtn.disabled = pageNumber <= 0;
