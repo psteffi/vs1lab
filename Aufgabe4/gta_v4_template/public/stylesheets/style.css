@@ -198,9 +198,8 @@ ul li {
   /* runde Ecken */
   border-radius: 3px;
   background-color: rgb(169, 208, 235);
-  color: black;
+  color: rgba(0, 0, 0, 0.76);
 }
-
 
 .pageButton:hover {
   cursor: pointer;
@@ -210,6 +209,7 @@ ul li {
 .pageButton:disabled {
   background-color: #cdcdcd;
   cursor: default;
+  color: rgba(0, 0, 0, 0.288);
 }
 
 /* --- Pagination End --- */

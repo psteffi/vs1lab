@@ -69,12 +69,16 @@ function renderGeoTags(taglist) {
 
     //--- handle empty list ---//
     if (taglist.length == 0) {
+    //erstelle ein Listenelement//
         const noResultsMessage = document.createElement("li");
+        //Inhalt des neuen Listenelements//
         noResultsMessage.innerHTML = "No results.";
+        //ersetze die bisherige Liste durch die neue (also die noResultsMessage)//
         geotaglist.replaceChildren(noResultsMessage);
+        //Ausnahmefall: es gibt 0 Seiten//
         document.getElementById("pageNumber").innerHTML = "0 / 0";
     } else {
-        //fill the list//
+        //fülle die Liste mit entsprechenden und zutreffenden GeoTags (Inhalt: ihre Attribute)//
         geotaglist.replaceChildren(...taglist.map((geotag) => {
             let listElement = document.createElement("li");
             listElement.innerHTML = `${geotag.name} (${geotag.latitude}, ${geotag.longitude}) ${geotag.hashtag}`;
@@ -94,6 +98,7 @@ async function taggingHandler(submitEvent) {
     // dafür da, dass nicht in '/tagging' geladen wird //
     submitEvent.preventDefault();
     
+    //erwarte ein POST auf /api/geotags//
     await fetch("/api/geotags", {
         method : "POST",
         headers : {
@@ -160,6 +165,7 @@ async function loadGeoTags(pageNumber, isNewQuery = false) {
     let resultList = document.getElementById("discoveryResults");
     let currentPage = document.getElementById("pageNumber");
 
+    //berechne den Grenzwert an Listenelementen//
     const start = pageNumber * resultPageLength;
     const url = getUrlForPages(start, resultPageLength);
 
@@ -167,22 +173,32 @@ async function loadGeoTags(pageNumber, isNewQuery = false) {
         resultList.dataset.pageCount = await calcPageNumber(url);
     }
 
+    //pageNumber = 0 / Anzahl an benötigten Seiten (berechnet in calcPageNumber)//
     currentPage.innerHTML = `${pageNumber + 1} / ${resultList.dataset.pageCount}`;
 
+    //klickt man auf den previous Button, wird die pageNumber um 1 erniedrigt//
     prevPageBtn.dataset.page = pageNumber - 1;
-    prevPageBtn.disabled = pageNumber <= 0;
+    //dieser Button soll disabled werden, wenn die aktuelle pageNumber 0 ist (ist man auf Seite 1, soll dieser Button nicht verwendbar sein)//
+    prevPageBtn.disabled = pageNumber == 0;
 
+    //klickt man auf den next Buttton, wird die pageNumber um 1 erhöht//
     nextPageBtn.dataset.page = pageNumber + 1;
-    nextPageBtn.disabled = pageNumber >= resultList.dataset.pageCount - 1;
+    //dieser Button soll disabled werden, wenn die aktuelle pageNumber der maximal benötigten Anzahl der Seiten entspricht (ist man auf Seite x/x, soll dieser Button nicht verwendbar sein)//
+    nextPageBtn.disabled = pageNumber == resultList.dataset.pageCount - 1;
 
+    //erwarte die URL der pageNumber (die Tags auf dieser Seite sollen auf der Karte angezeigt werden)//
     renderGeoTags(await (await fetch (url)).json());
 }
 
 //--- berechne die benötigte Anzahl an Seiten, um alle GeoTags darstellen zu können ---//
 async function calcPageNumber(url) {
     console.log("calcPageNumber");
+    //teile die URL auf in die query-Parameter und seinen Wert (Stelle 0)//
     return fetch(url.split("&limit=")[0])
+        //gib das als JSON zurück//
         .then(resp => resp.json()
+            //berechne die Anzahl an benötigten Seiten (aufrunden)//
+            //Bsp.: body.length = 28; resultPageLength = 8; 28/8 = 3.5, also 4 → man braucht 4 Seiten//
             .then(body => Math.ceil(body.length / resultPageLength)));
 }
 
