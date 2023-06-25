@@ -16,6 +16,7 @@ var mapM = new MapManager("BvSIZ5qQ0kchef3XsC2M3bhrzefd11vE");
 
 
 function parseTags() {
+    console.log("parseTags()");
     const imageElement = document.getElementById('mapView');
     const taglist_json = imageElement.getAttribute('data-tags');
     return JSON.parse(taglist_json);
@@ -85,6 +86,7 @@ function renderGeoTags(taglist) {
 
 //--- Tagging handling ---//
 async function taggingHandler(submitEvent) {
+    console.log("taggingHandler");
     // dafür da, dass nicht in '/tagging' geladen wird //
     submitEvent.preventDefault();
     
@@ -109,6 +111,7 @@ async function taggingHandler(submitEvent) {
 
 //--- Discovery handling ---//
 async function discoveryHandler(submitEvent) {
+    console.log("discoveryHandler");
     // dafür da, dass nicht in '/discovery' geladen wird //
     submitEvent.preventDefault();
 
@@ -121,19 +124,24 @@ async function discoveryHandler(submitEvent) {
 
 //--- URl erstellen, die die Seiten implementiert ---//
 //--- limit = -1 : letztes Element im Array ---//
+//--- 0 und -1 sind default Werte, falls nichts angegeben wird ---//
 function getUrlForPages(start = 0, limit = -1) {
+    console.log("getUrlForPages");
     const latitude = document.getElementById("latitude").value;
     const longitude = document.getElementById("longitude").value;
     const query = document.getElementById("searchterm").value;
 
     let url = `/api/geotags?latitude=${latitude}&longitude=${longitude}`;
 
+    //--- wenn die query nicht leer ist, soll der searchterm angehängt werden ---//
     if (query != "") {
         url += `&searchterm=${encodeURIComponent(query)}`;
     }
 
+    //--- an die url soll der Startwert "start" angehängt werden ---//
     url += `$start=${start}`;
     if (limit != -1) {
+    //--- weicht der Endwert "limit" vom Default "-1" (also letztes Element in der Liste) ab, soll dieser auch hinzugefügt werden ---//
         url += `&limit=${limit}`;
     }
 
@@ -142,6 +150,7 @@ function getUrlForPages(start = 0, limit = -1) {
 
 //--- isNewQuery default = false ---//
 async function loadGeoTags(pageNumber, isNewQuery = false) {
+    console.log("loadGeoTags");
     let nextPageBtn = document.getElementById("nextPage");
     let prevPageBtn = document.getElementById("prevPage");
     let resultList = document.getElementById("discoveryResults");
@@ -167,6 +176,7 @@ async function loadGeoTags(pageNumber, isNewQuery = false) {
 
 //--- berechne die benötigte Anzahl an Seiten, um alle GeoTags darstellen zu können ---//
 async function calcPageNumber(url) {
+    console.log("calcPageNumber");
     return fetch(url.split("&limit=")[0])
         .then(resp => resp.json()
             .then(body => Math.ceil(body.length / resultPageLength)));
