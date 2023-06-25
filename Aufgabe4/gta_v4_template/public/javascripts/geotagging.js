@@ -40,7 +40,7 @@ function updateLocation(){
         updateURL(lat, long);
     }
 
-    return [lat, long];
+    //return [lat, long];
 }
 
 
@@ -51,9 +51,9 @@ function updateLocation(){
 function updateURL(latitude, longitude) {
 
     const taglist = parseTags();
-    const mapView = document.getElementById("mapView");
     const mapurl = mapM.getMapUrl(latitude, longitude, taglist, 16);
-    mapView.setAttribute("src", mapurl);
+    const mapView = document.getElementById("mapView");
+    mapView.src = mapurl;
 }
 
 

@@ -45,8 +45,8 @@ class InMemorygeotagStore{
         
 //--- dem GeoTag eine neue ID hinzufügen ---//
         geotag.id = this.#id;   //--- beim ersten erstellten GeoTag ist die ID = 0 (siehe Konstruktor)
-        this.#store.push(geotag)
-        console.log(this.#store)
+        this.#store.push(geotag);
+        console.log(this.#store);
 //--- für den nächsten GeoTag soll die ID um eins erhöht werden, sodass keine zwei Tags dieselbe ID haben ---//
 //--- durch Postinkrement wird die ID erst nach return erhöht, sodass nun die ID des eben erstellten GeoTags zurückgegeben wird ---//
         return this.#id++;
@@ -59,13 +59,13 @@ class InMemorygeotagStore{
 
 //--- Methode, die einen GeoTag mit neuen Werten ersetzen soll ---//
 //--- Parameter: Bisherige ID, neuer GeoTag (also die neuen Werte) ---//
-    replaceGeoTagById(id, geotag) {
+    replaceGeoTagById(id, newTag) {
 //--- in #store werden nun nur noch alle GeoTags angegeben, die nicht der ID (Parameter) entsprechen ---//
         this.#store = this.#store.filter(geotag => geotag.id != id);
-        geotag.id = id;
+        newTag.id = id;
 //--- GeoTag mit gleicher ID und neu eingefügten Werten wird in den #store gepusht ---//
-        this.#store.push(geotag);
-        return geotag;
+        this.#store.push(newTag);
+        return newTag;
     }
 
     // Remove
@@ -78,11 +78,6 @@ class InMemorygeotagStore{
         return this.#store.filter(geotag => this.#distancepythagoras(latitude, longitude, geotag.latitude, geotag.longitude) <= radius);
     }
 
-    #distancepythagoras(lat1, lon1, lat2, lon2) {
-        var a = Math.pow(lat1 - lat2, 2);
-        var b = Math.pow(lon1 - lon2, 2);
-        return Math.sqrt(a+b);
-    }
 
     // searchNearby
     searchNearby(latitude, longitude, radius, searchTerm) {
@@ -93,6 +88,13 @@ class InMemorygeotagStore{
         );
     }
 
+
+    
+    #distancepythagoras(lat1, lon1, lat2, lon2) {
+        var a = Math.pow(lat1 - lat2, 2);
+        var b = Math.pow(lon1 - lon2, 2);
+        return Math.sqrt(a+b);
+    }  
 }
 
 module.exports = InMemorygeotagStore
