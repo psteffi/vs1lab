@@ -59,13 +59,13 @@ class InMemorygeotagStore{
 
 //--- Methode, die einen GeoTag mit neuen Werten ersetzen soll ---//
 //--- Parameter: Bisherige ID, neuer GeoTag (also die neuen Werte) ---//
-    replaceGeoTagById(id, newTag) {
+    replaceGeoTagById(id, geotag) {
 //--- in #store werden nun nur noch alle GeoTags angegeben, die nicht der ID (Parameter) entsprechen ---//
         this.#store = this.#store.filter(geotag => geotag.id != id);
-        newTag.id = id;
+        geotag.id = id;
 //--- GeoTag mit gleicher ID und neu eingefügten Werten wird in den #store gepusht ---//
-        this.#store.push(newTag);
-        return newTag;
+        this.#store.push(geotag);
+        return geotag;
     }
 
     // Remove

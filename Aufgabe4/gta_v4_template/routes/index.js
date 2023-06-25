@@ -48,36 +48,36 @@ router.get('/', (req, res) => {
   res.render('index', { taglist: database.getAll() })
 });
 
-// router.post('/tagging', (req, res) => {
-//   database.add(new GeoTag(req.body.latitude, req.body.longitude, req.body.name, req.body.hashtag));
-//   res.render('index', {
-//     taglist: database.getAll(), 
-//     query: req.body.query,
-//     latitude: req.body.latitude,
-//     longitude: req.body.longitude
-//   });
-// });
+router.post('/tagging', (req, res) => {
+  database.add(new GeoTag(req.body.latitude, req.body.longitude, req.body.name, req.body.hashtag));
+  res.render('index', {
+    taglist: database.getAll(), 
+    query: req.body.query,
+    latitude: req.body.latitude,
+    longitude: req.body.longitude
+  });
+});
 
 
-// router.post('/discovery', (req, res) => {
-//   const searchRadius = 1;
-//   const latitude = parseFloat(req.body.latitudesearch);
-//   const longitude = parseFloat(req.body.longitudesearch);
-//   let taglist = [];
+router.post('/discovery', (req, res) => {
+  const searchRadius = 1;
+  const latitude = parseFloat(req.body.latitudesearch);
+  const longitude = parseFloat(req.body.longitudesearch);
+  let taglist = [];
  
-//   if (req.body.searchterm) {
-//     taglist = database.searchNearby(latitude, longitude, searchRadius, req.body.searchterm);
-//   } else {
-//     taglist = database.getNearby(latitude, longitude, searchRadius);
-//   }
+  if (req.body.searchterm) {
+    taglist = database.searchNearby(latitude, longitude, searchRadius, req.body.searchterm);
+  } else {
+    taglist = database.getNearby(latitude, longitude, searchRadius);
+  }
 
-//   res.render('index', {
-//     taglist: taglist, 
-//     query: req.body.searchterm,
-//     latitude: latitude,
-//     longitude: longitude
-//   });
-// })
+  res.render('index', {
+    taglist: taglist, 
+    query: req.body.searchterm,
+    latitude: latitude,
+    longitude: longitude
+  });
+})
 
 // API routes (A4)
 
@@ -135,8 +135,8 @@ router.get('/api/geotags', (req, res) => {
 
   router.post('/api/geotags', (req, res) => {
 
-    const latitude = req.body.latitude;
-    const longitude = req.body.longitude;
+    const latitude = parseFloat(req.body.latitude);
+    const longitude = parseFloat(req.body.longitude);
     const name = req.body.name;
     const hashtag = req.body.hashtag;
 
@@ -188,8 +188,8 @@ router.get('/api/geotags/:id', (req, res) => {
 router.put('/api/geotags/:id', (req, res) =>  {
 
   const id = req.params.id;
-  const latitude = req.body.latitude;
-  const longitude = req.body.longitude;
+  const latitude = parseFloat(req.body.latitude);
+  const longitude = parseFloat(req.body.longitude);
   const name = req.body.name;
   const hashtag = req.body.hashtag;
 
