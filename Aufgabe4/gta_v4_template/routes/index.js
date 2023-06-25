@@ -99,9 +99,9 @@ router.post('/discovery', (req, res) => {
 router.get('/api/geotags', (req, res) => {
 
   let taglist = [];
-  const latitude = req.body.latitude;
-  const longitude = req.body.longitude;
-  const searchterm = req.body.searchterm;
+  const latitude = parseFloat(req.query.latitude);
+  const longitude = parseFloat(req.query.longitude);
+  const searchterm = req.query.searchterm;
 
 //--- sind latitude und longitude gegeben, wird auf searchterm geprüft ---//
   if (latitude && longitude) {
