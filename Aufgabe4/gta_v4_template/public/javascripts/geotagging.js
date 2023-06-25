@@ -78,9 +78,7 @@ function renderGeoTags(taglist) {
     }));
 
     const mapView = document.getElementById("mapView");
-
     mapView.setAttribute("data-tags", JSON.stringify(taglist));
-
     updateURL(document.getElementById("latitude").value, document.getElementById("longitude").value);
 }
 
@@ -92,11 +90,11 @@ async function taggingHandler(submitEvent) {
     
     await fetch("/api/geotags", {
         method : "POST",
-        headers: {
+        headers : {
             "Content-Type": "application/json"
         },
 
-        body: JSON.stringify({
+        body : JSON.stringify({
             latitude : document.getElementById("latitude").value,
             longitude : document.getElementById("longitude").value,
             name : document.getElementById("name").value,

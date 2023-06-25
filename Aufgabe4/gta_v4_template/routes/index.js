@@ -92,11 +92,11 @@ router.get('/api/geotags', (req, res) => {
 //--- Pagination start ---//
 
   const start = parseInt(req.query.start);
-  const end = parseInt(req.query.limit);
+  const limit = parseInt(req.query.limit);
 
 if (start) { //ist ein Startpunkt gegeben?
-  if (end) { //ist ein Endpunkt gegeben?
-    taglist = taglist.slice(start, start + end); //taglist soll aufgeteilt werden 
+  if (limit) { //ist ein Endpunkt gegeben?
+    taglist = taglist.slice(start, start + limit); //taglist soll aufgeteilt werden 
   } else {
     taglist = taglist.slice(start);
   }
