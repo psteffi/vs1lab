@@ -143,7 +143,7 @@ function getUrlForPages(start = 0, limit = -1) {
     }
 
     //--- an die url soll der Startwert "start" angehängt werden ---//
-    url += `$start=${start}`;
+    url += `&start=${start}`;
     if (limit != -1) {
     //--- weicht der Endwert "limit" vom Default "-1" (also letztes Element in der Liste) ab, soll dieser auch hinzugefügt werden ---//
         url += `&limit=${limit}`;
